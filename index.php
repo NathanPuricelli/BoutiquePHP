@@ -1,8 +1,8 @@
 <?php
-require_once 'Model/DialogueBD.php';
+require_once 'Model/Catalogue.php';
 session_start(); // démarrage d'une session
-$undlg = new DialogueBD();
-$products = $undlg->getAllProducts() ?>
+$undlg = new Catalogue();
+$products = $undlg->getCategories() ?>
 
 
 <!doctype html>
