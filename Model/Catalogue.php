@@ -1,7 +1,7 @@
 <?php
 require_once 'Modele.php';
 class Catalogue extends Modele{
-    public function getCategories()
+    public function getProducts()
     {
         $sql = "SELECT * FROM products";
         $categories = $this->executerRequete($sql);
