@@ -1,21 +1,29 @@
 <?php $this->titre = "Catalogue"; ?>
 
 
+<div class="container catalogue">
+    <div class="text-center">
+        <h1>Qu'est-ce qui vous ferait plaisir ?</h1>
+    </div>
+    <div class="row">
 
-<?php foreach ($products as $product):
-    ?>
-    <h2>
-        <header>
+<?php foreach ($products as $product):?>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="box">
             <a href="<?= "index.php?action=product&id=" . $product['id'] ?>">
-                <h1 class="titreBillet"><?= $product['name'] ?></h1>
+                <h3><?= $product['name'] ?></h3>
             </a>
-            <?php $image = $product['image'] ?>
-            <?php 
+            <?php $image = $product['image'];
             $chemin="assets/img/".$image;
-            $img = "<img src = \"" . $chemin ."\"/>";
-            echo ($img); 
-            ?>
-        </header>
-    </h2>
-    <hr />
+            $img = "<img src = \"" . $chemin ."\" class =\"articleImg\">";
+            echo ($img);?>
+            <p><?= $product['description'] ?></p>
+            <?php $price = $product['price'];
+            echo("<h5>". $price . "€ </h5>");?>
+            <button class="btn1" type="submit">Ajouter au panier</button>
+        </div>
+    </div>
+
 <?php endforeach; ?>
+</div>

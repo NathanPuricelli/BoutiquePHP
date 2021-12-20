@@ -2,21 +2,64 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link rel="stylesheet" href="assets/css/style.css" />
         <title><?= $titre ?></title>
     </head>
     <body>
         <div id="global">
-            <header>
-                <a href="index.php"><h1 id="titreBlog">Shopify 2.0</h1></a>
-                <p>Achetez ces super produits au prix absolument abordable.</p>
-            </header>
+        <nav class="navbar navbar-expand-lg fixed-top navbar-light">
+          <div class="container">
+            <a class="navbar-left" href="#"><img src="assets/img/shopify.png" class="nav-logo"></a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarScroll">
+
+              <ul class="navbar-nav m-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#">Catalogue</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Promotions</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Catégories</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Panier</a>
+                </li>
+              </ul>
+
+              <div class="search-bar">
+                <form class="d-flex">
+                  <input class="search-zone" type="chercher" placeholder="" aria-label="Chercher">
+                  <button class="btn0" type="submit">Chercher</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          
+      </nav>
             <div id="contenu">
                 <?= $contenu ?>
             </div> <!-- #contenu -->
-            <footer id="piedBlog">
-                Blog réalisé avec PHP, HTML5 et CSS.
-            </footer>
+            
+            <footer id="contact">
+            <div id="deuxiemeTrait"></div>
+            <div id="copyrightEtIcons">
+                <div id="copyright">
+                    <span>© PURICELLI Nathan et LETO Aymeric</span>
+                </div>
+            <div id="icons">
+                <a href="https://forge.univ-lyon1.fr/p1907453/boutique"><img src = "assets/img/git.png"></i></a>
+            </div>
+            </div>
+        </footer>
         </div> <!-- #global -->
     </body>
 </html>
