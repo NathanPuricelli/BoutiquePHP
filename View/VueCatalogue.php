@@ -5,7 +5,7 @@
     <div class="text-center">
         <h1>Qu'est-ce qui vous ferait plaisir ?</h1>
     </div>
-    <div class="row">
+<div class="row">
 
 <?php foreach ($products as $product):?>
 
@@ -19,8 +19,10 @@
             $img = "<img src = \"" . $chemin ."\" class =\"articleImg\">";
             echo ($img);?>
             <p><?= $product['description'] ?></p>
+            <div class="smallLine"></div>
             <?php $price = $product['price'];
             echo("<h5>". $price . "€ </h5>");?>
+            <div class="smallLine"></div>
             <button class="btn1" type="submit">Ajouter au panier</button>
         </div>
     </div>
