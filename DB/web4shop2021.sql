@@ -307,8 +307,8 @@ INSERT INTO `reviews` (`id_product`, `name_user`, `photo_user`, `stars`, `title`
 (17, 'sabrina', 'femme.png', 5, 'à essayer', 'un café doux et savoureux dans un emballage de qualité. le prix est raisonnable; je recommande!'),
 (20, 'Dominique', 'homme.jpg', 3, 'bon', 'un produit de qualité; ce thé est parfumé et on apprécie le gout délicat de la cannelle; je vous le recommande.'),
 (22, 'Sylvain', 'homme.jpg', 5, 'délicieux', 'une boisson très parfumée; idéale pour bien démarrer la journée; à essayer les yeux fermés.'),
-(29, 'Aymeric', 'femme.jpg', 5, 'Croquante', 'Croquante et savourese, la banane surgelée a su satisfaire toutes mes pulsions. Entrée plat ou dessert, elle se mange à toutes les heures.'),
-(30, 'Nathan', 'femme.jpg', 5, 'Succulents', 'Succulents et savoureux, les raisins secs ont su me reveiller. Entrée plat ou dessert, ils se mangent à toutes les heures.');
+(29, 'Aymeric', 'femme.png', 5, 'Croquante', 'Croquante et savourese, la banane surgelée a su satisfaire toutes mes pulsions. Entrée plat ou dessert, elle se mange à toutes les heures.'),
+(30, 'Nathan', 'femme.png', 5, 'Succulents', 'Succulents et savoureux, les raisins secs ont su me reveiller. Entrée plat ou dessert, ils se mangent à toutes les heures.');
 
 --
 -- Index pour les tables déchargées

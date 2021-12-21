@@ -11,3 +11,15 @@ Vues :
     -Vues : gère les variables qui changent par rapport au gabarit
 Controller :
     -Fait le lien entre la bdd et la vue.
+
+
+
+    To do : 
+        -Product : 
+            Choisir la quantité a ajouter au panier.
+            Griser le Bouton ajouter au panier si qté = 0
+            Ajouter un commentaire via un formulaire en bas de page 
+        -Panier :
+            Pour les non connectés avec les variables de session
+            Pour les connectés.
+        -Page admin pour check tout (vérifier que l'admin est connecté)
