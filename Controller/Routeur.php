@@ -1,16 +1,16 @@
 <?php
 
-require_once 'Controller/ControllerCatalogue.php';
+require_once 'Controller/ControllerCatalog.php';
 require_once 'Controller/ControllerProduct.php';
-require_once 'View/Vue.php';
+require_once 'View/View.php';
 class Routeur {
 
-    private $ctrlCatalogue;
+    private $ctrlCatalog;
     private $ctrlProduct;
 
     public function __construct() {
-        $this->ctrlCatalogue = new ControleurCatalogue();
-        $this->ctrlProduct = new ControleurProduct();
+        $this->ctrlCatalog = new ControllerCatalog();
+        $this->ctrlProduct = new ControllerProduct();
     }
 
     // Route une requête entrante : exécution l'action associée
@@ -18,11 +18,11 @@ class Routeur {
         try {
             if (isset($_GET['page'])) {
                 if ($_GET['page'] == 'catalog') {
-                   $this->ctrlCatalogue->accueil();
+                   $this->ctrlCatalog->accueil();
                 }
                 else if(($_GET['page'] == 'product') && (isset($_GET['id'])))
                 {
-                    $id = $_GET['id'];
+                    $id = intval($_GET['id']);
                     $this->ctrlProduct->showProduct($id);
 
                 }
@@ -30,7 +30,7 @@ class Routeur {
                     throw new Exception("Action non valide");
             }
             else {
-                $this->ctrlCatalogue->accueil();
+                $this->ctrlCatalog->accueil();
             }
         }
         catch (Exception $e) {
@@ -40,7 +40,7 @@ class Routeur {
 
     // Affiche une erreur
     private function erreur($msgErreur) {
-        $vue = new Vue("Erreur");
+        $vue = new View("Error");
         $vue->generer(array('msgErreur' => $msgErreur));
     }
 }

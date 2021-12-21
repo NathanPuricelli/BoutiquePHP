@@ -1,6 +1,6 @@
 <?php
-require_once 'Modele.php';
-class Catalogue extends Modele{
+require_once 'Model.php';
+class Catalog extends Model{
     public function getProducts()
     {
         $sql = "SELECT * FROM products";

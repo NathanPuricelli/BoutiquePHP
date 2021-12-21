@@ -1,9 +1,9 @@
 <?php
 
 require_once 'Model/Product.php';
-require_once 'View/Vue.php';
+require_once 'View/View.php';
 
-class ControleurProduct {
+class ControllerProduct {
 
     private $product;
 
@@ -15,7 +15,7 @@ class ControleurProduct {
     public function showProduct($id) {
         $product = $this->product->getProduct($id);
         $reviews = $this->product->getReviews($id);
-        $vue = new Vue("Product");
+        $vue = new View("Product");
         $vue->generer(array('product' => $product, 'reviews' => $reviews));
     }
 

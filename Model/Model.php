@@ -1,7 +1,7 @@
 <?php
 
 
-abstract class Modele {
+abstract class Model {
 
     private $bdd;
 

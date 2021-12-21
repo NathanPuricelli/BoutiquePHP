@@ -1,6 +1,6 @@
 <?php
-require_once 'Modele.php';
-class Product extends Modele{
+require_once 'Model.php';
+class Product extends Model{
     public function getProduct($id)
     {
         $sql = "SELECT * FROM products WHERE id = ?";
@@ -19,7 +19,7 @@ class Product extends Modele{
         $product = $this->executerRequete($sql, array($id));
         if ($product->rowCount() > 0)
         {
-            return $product->fetch();
+            return $product;
         }
         else
             return;
