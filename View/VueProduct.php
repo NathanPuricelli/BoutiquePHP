@@ -1,20 +1,20 @@
-<?php $this->titre = "Catalogue"; ?>
+<?php $this->titre = "Product"; ?>
 
 
 <div class="container catalogue">
     <div class="text-center">
-        <h1>Qu'est-ce qui vous ferait plaisir ?</h1>
+        <h1><?= $product['name']?> ?</h1>
     </div>
     <div class="row">
 
-    <?php foreach ($products as $product):?>
+    <?php foreach ($reviews as $review):?>
 
         <div class="col-lg-3 col-md-6">
             <div class="box">
                 <a href="<?= "index.php?page=product&id=" . $product['id'] ?>">
-                    <h3><?= $product['name'] ?></h3>
+                    <h3><?= $review['name_user'] ?></h3>
                 </a>
-                <?php $image = $product['image'];
+                <!--<?php $image = $product['image'];
                 $chemin="assets/img/".$image;
                 $img = "<img src = \"" . $chemin ."\" class =\"articleImg\">";
                 echo ($img);?>
@@ -23,7 +23,7 @@
                 <?php $price = $product['price'];
                 echo("<h5>". $price . "€ </h5>");?>
                 <div class="smallLine"></div>
-                <button class="btn1" type="submit">Ajouter au panier</button>
+                <button class="btn1" type="submit">Ajouter au panier</button> -->
             </div>
         </div>
 
