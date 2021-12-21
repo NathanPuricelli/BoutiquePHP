@@ -3,7 +3,7 @@
 
 <div class="container">
     <div class="row productBox">
-        <div class="col-md-9 col-sm-12">
+        <div class="col-md-8 col-sm-12">
             <div class="row">
                 <div class="col-md-12 col-sm-6 productImg">
                     <?php 
@@ -19,13 +19,22 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3 col-sm-12 productBuyingSection">
+        <div class="col-md-4 col-sm-12 productBuyingSection">
                 <h3><?= $product['name'] ?></h3>
-                <h5>Prix : <?= $product['price'] ?> €</h5>
-                <p>Quantité disponible : <?= $product['quantity'] ?></p>
-                <p>Combien en voulez-vous ?</p>
-                <!-- Bail de bouton - et +  -->
-                <button class="btn1" type="submit">Ajouter au panier</button>
+                <h5>Prix : <?= $product['price'] ?>€</h5>
+                <p>Quantité disponible : <span class="quantityAvailable"><?= $product['quantity'] ?></span></p>
+                <?php if ($product['quantity'] != 0):?>
+                    <p>Combien en voulez-vous ?</p>
+                    <p>
+                        <!-- Sortir les boutons de la classe à modifier ou ajouter un span autour du 1-->
+                        <button class="btn2 counterMinus" type="submit">-</button>
+                        <span class="counterSection">1</span>
+                        <button class="btn2 counterPlus" type="submit">+</button>
+                    </p>
+                    <button class="btn1" type="submit">Ajouter au panier</button>
+                <?php else: ?>
+                    <h5 class="unavailableProductText">Article en rupture de stock</h5>
+                <?php endif; ?>
         </div>
     </div>
 
@@ -65,3 +74,5 @@
     </div>
 
 </div>
+
+<script type="text/javascript" src="assets/js/productCounterAndAvailability.js"></script>

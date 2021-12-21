@@ -87,6 +87,12 @@ a  {
     text-align: center;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
+    transition: 0.2s;
+}
+
+.catalogBox:hover {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    transition: 0.2s;
 }
 
 .catalogBox h3 {
@@ -156,9 +162,12 @@ a  {
 .productBox {
     margin-top: 20px;
     margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
     padding: 10px;
+    width: 70%;
 
-    background: rgb(255, 255, 255);
+    background: rgb(252, 252, 252);
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
 }
@@ -176,8 +185,31 @@ a  {
 }
 
 .productBox .productBuyingSection {
-    text-align: right;
     border-left: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.btn2 {
+    margin: 8px;
+
+    height: 30px;
+    width: 30px;
+    border: none;
+    border-radius: 50%;
+    outline: none;
+    background-color: var(--custom-color-basic);
+
+    color : white;
+    font-weight: 700;
+    transition: 0.2s;
+}
+
+.btn2:hover {
+    background-color: var(--custom-color-hover);
+    transition: 0.2s;
+}
+
+.productBox .productBuyingSection .unavailableProductText {
+    color:rgb(158, 37, 37);
 }
 
 /* AFFICHAGE AVIS */
