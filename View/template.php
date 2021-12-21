@@ -30,13 +30,13 @@
                   <a class="nav-link active" href="?page=catalog">Catalogue</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Promotions</a>
-                </li>
-                <li class="nav-item">
                   <a class="nav-link" href="#">Catégories</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="?page=product&id=29">Panier</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Connexion</a>
                 </li>
               </ul>
 
