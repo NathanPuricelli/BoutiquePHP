@@ -14,8 +14,8 @@ class ControllerCatalog {
 // Affiche la liste de tous les trucs à acheter
     public function accueil() {
         $products = $this->catalogue->getProducts();
-        $vue = new View("Catalog");
-        $vue->generer(array('products' => $products));
+        $view = new View("Catalog");
+        $view->generer(array('products' => $products));
     }
 
 }

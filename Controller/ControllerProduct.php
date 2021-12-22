@@ -15,8 +15,8 @@ class ControllerProduct {
     public function showProduct($id) {
         $product = $this->product->getProduct($id);
         $reviews = $this->product->getReviews($id);
-        $vue = new View("Product");
-        $vue->generer(array('product' => $product, 'reviews' => $reviews));
+        $view = new View("Product");
+        $view->generer(array('product' => $product, 'reviews' => $reviews));
     }
 
 }

@@ -23,3 +23,7 @@ Controller :
             Pour les non connectés avec les variables de session
             Pour les connectés.
         -Page admin pour check tout (vérifier que l'admin est connecté)
+
+    Idées :
+        Pour la page 'Catégories' : En faire un copie de la page Catalogue mais en replaçant les différents articles par les différentes catégories,
+        de là, afficher à nouveau la page 'Catalogue' avec cette fois ci uniquement les article du type demandé

@@ -2,15 +2,18 @@
 
 require_once 'Controller/ControllerCatalog.php';
 require_once 'Controller/ControllerProduct.php';
+require_once 'Controller/ControllerCart.php';
 require_once 'View/View.php';
 class Routeur {
 
     private $ctrlCatalog;
     private $ctrlProduct;
+    private $ctrlCart;
 
     public function __construct() {
         $this->ctrlCatalog = new ControllerCatalog();
         $this->ctrlProduct = new ControllerProduct();
+        $this->ctrlCart = new ControllerCart();
     }
 
     // Route une requête entrante : exécution l'action associée
@@ -20,12 +23,14 @@ class Routeur {
                 if ($_GET['page'] == 'catalog') {
                    $this->ctrlCatalog->accueil();
                 }
-                else if(($_GET['page'] == 'product') && (isset($_GET['id'])))
-                {
+                else if(($_GET['page'] == 'product') && (isset($_GET['id']))) {
                     $id = intval($_GET['id']);
                     $this->ctrlProduct->showProduct($id);
 
                 }
+                /*else if () {
+
+                }*/
                 else
                     throw new Exception("Action non valide");
             }
