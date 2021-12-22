@@ -5,7 +5,7 @@
     <div class="row productBox">
         <div class="col-md-8 col-sm-12">
             <div class="row">
-                <div class="col-md-12 col-sm-6 productImg">
+                <div class="col-md-12 col-sm-6 productImgSection">
                     <?php 
                     $image = $product['image'];
                     $chemin="assets/img/".$image;

@@ -117,11 +117,6 @@ a  {
     display: flex;
     justify-content: center;
     align-items: center;
-    /*text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    height: 75px;
-    background-color: #d89000;*/
 }
 
 .catalogBox .smallLine {
@@ -172,11 +167,16 @@ a  {
     border-radius: 5px;
 }
 
+.productBox .productImgSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .productBox .productImg {
     width: 400px;
-    height: 400px;
-    margin-left: auto;
-    margin-right: auto;
+    height: auto;
+    max-width: 100%;
 }
 
 .productBox .productDescription {
