@@ -11,8 +11,13 @@ class ControllerCart {
         $this->cart = new Cart();
     }
 
-    // Affiche la liste des arcticles dans le panier, et les informations pour regler
+    public function addItemToOder() {
+        //Ajoute une ligne à la table orderitem en indiquant quel produit et en quelle quantité il a été ajouté
+        
+    }
+    
     public function showCartContent() {
+        // Affiche la liste des arcticles dans le panier, et les informations pour regler
         $products = $this->cart->getCartContent();
         $view = new View("Cart");
         $view->generer(array('products' => $products));

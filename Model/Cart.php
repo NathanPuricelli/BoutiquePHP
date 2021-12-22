@@ -4,6 +4,8 @@ class Cart extends Model{
     public function getCartContent()
     {
         /*
+        Est-ce que la commande en cours est stockée dans un post ?
+
         $sql = "SELECT * FROM products WHERE id = ?";
         $product = $this->executerRequete($sql, array($id));
         if ($product->rowCount() > 0)
