@@ -30,9 +30,6 @@
                   <a class="nav-link active" href="?page=catalog">Catalogue</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Catégories</a>
-                </li>
-                <li class="nav-item">
                   <a class="nav-link" href="#">Panier</a>
                 </li>
                 <li class="nav-item">
