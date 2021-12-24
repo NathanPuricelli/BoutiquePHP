@@ -5,17 +5,19 @@ require_once 'View/View.php';
 
 class ControllerCatalog {
 
-    private $catalogue;
+    private $catalog;
 
     public function __construct() {
-        $this->catalogue = new Catalog();
+        $this->catalog = new Catalog();
     }
 
 // Affiche la liste de tous les trucs à acheter
-    public function accueil() {
-        $products = $this->catalogue->getProducts();
+    public function accueil($cat_id) {
+        $categories = $this->catalog->getCategories();
+        $categ = $this->catalog->getCategoryName($cat_id);
+        $products = $this->catalog->getProducts($cat_id);
         $view = new View("Catalog");
-        $view->generer(array('products' => $products));
+        $view->generer(array('products' => $products, 'categories' => $categories, 'category_name' => $categ));
     }
 
 }

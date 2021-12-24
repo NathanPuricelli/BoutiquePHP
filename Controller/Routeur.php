@@ -21,7 +21,13 @@ class Routeur {
         try {
             if (isset($_GET['page'])) {
                 if ($_GET['page'] == 'catalog') {
-                   $this->ctrlCatalog->accueil();
+                    if (isset($_GET['cat'])){
+                        $this->ctrlCatalog->accueil(intval($_GET['cat']));
+
+                    }
+                    else{
+                        $this->ctrlCatalog->accueil(0);
+                    }
                 }
                 else if(($_GET['page'] == 'product') && (isset($_GET['id']))) {
                     $id = intval($_GET['id']);
@@ -35,7 +41,7 @@ class Routeur {
                     throw new Exception("Action non valide");
             }
             else {
-                $this->ctrlCatalog->accueil();
+                $this->ctrlCatalog->accueil(0);
             }
         }
         catch (Exception $e) {

@@ -79,6 +79,14 @@ a  {
 }
 
 /* CATALOGUE */
+.categorie .clickableBox{
+
+    background: #fff;
+    text-align: center;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    color: #444444;
+}
 
 .catalogBox {
     padding: 5px;
