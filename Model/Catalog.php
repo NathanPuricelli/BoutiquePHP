@@ -1,16 +1,15 @@
 <?php
 require_once 'Model.php';
 class Catalog extends Model{
-    public function getProducts($cat_id)
-    {
-        if($cat_id != 0){
+    public function getProducts($cat_id) {
+        if($cat_id != 0) {
             $sql = "SELECT * FROM products WHERE cat_id = ?";
             $products = $this->executerRequete($sql, array($cat_id));
             
-            if ($products->rowCount() > 0){
+            if ($products->rowCount() > 0) {
                 return $products;
             }
-            else{
+            else {
                 throw new Exception("Aucun produit ne correspond à l'identifiant '$cat_id'");
             }
         }
@@ -19,26 +18,23 @@ class Catalog extends Model{
             $products = $this->executerRequete($sql);
             return $products;
         }
-    } 
-    public function getCategories()
-    {
+    }
+
+    public function getCategories() {
         $sql = "SELECT * FROM categories";
         $categories = $this->executerRequete($sql);
         return $categories;
     } 
 
-    public function getCategoryName($id)
-    {
-        if($id == 0)
-        {
+    public function getCategoryName($id) {
+        if ($id == 0) {
             $categ = array('name' => 'Toutes les categories');
             return $categ;
         }
-        else{
+        else {
             $sql = "SELECT name FROM categories where id = ?";
             $categ = $this->executerRequete($sql, array($id));
-            if ($categ->rowCount() > 0)
-            {
+            if ($categ->rowCount() > 0) {
                 return $categ->fetch();
             }
             else

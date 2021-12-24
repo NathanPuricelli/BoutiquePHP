@@ -4,29 +4,32 @@
 <div class="container catalog">
     <div class="text-center">
         <h1>Qu'est-ce qui vous ferait plaisir ?</h1>
-        <ul>
-            <div class="categorie">
-                <a href="index.php?page=catalog">
-                <div class="clickableBox">
-                        <h4>TOUS NOS PRODUITS</h4>
-                </div>
-                </a>
-            </div>
-            <?php foreach ($categories as $categorie):?>
-                <div class="categorie">
-                    <a href="<?= "index.php?page=catalog&cat=" . $categorie['id'] ?>">
-                    <div class="clickableBox">
-                        <h4><?= strtoupper($categorie['name']) ?></h4>
-                    </div>
-                    </a>
-                </div>
-            <?php endforeach; ?>
-
-
-        </ul>
-        
     </div>
-    <p><?= $category_name['name'] ?></p>
+    <a href="index.php?page=catalog">
+    <?php if($category_name['name'] == 'Toutes les categories'):?>
+    <div class="categoryBox selected">
+    <?php else:?>
+    <div class="categoryBox">
+    <?php endif;?>
+        <h4>TOUS NOS PRODUITS</h4>
+    </div>
+    </a>
+
+    <?php foreach ($categories as $categorie):?>
+    
+    <a href="<?= "index.php?page=catalog&cat=" . $categorie['id'] ?>">
+    <?php if($category_name['name'] == $categorie['name']):?>
+    <div class="categoryBox selected">
+    <?php else:?>
+    <div class="categoryBox">
+    <?php endif;?>
+        <h4><?= strtoupper($categorie['name']) ?></h4>
+    </div>
+    </a>
+        
+    <?php endforeach; ?>
+
+    <!--<p><?= $category_name['name'] ?></p>-->
 
 
     <div class="row">

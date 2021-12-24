@@ -33,10 +33,10 @@
                   <a class="nav-link" href="#">Catégories</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="?page=product&id=29">Panier</a>
+                  <a class="nav-link" href="#">Panier</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Connexion</a>
+                  <a class="nav-link" href="?page=login">Connexion</a>
                 </li>
               </ul>
 

@@ -79,13 +79,23 @@ a  {
 }
 
 /* CATALOGUE */
-.categorie .clickableBox{
-
+.categoryBox {
     background: #fff;
     text-align: center;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     color: #444444;
+    transition: 0.2s;
+}
+
+.selected {
+    background: rgb(230, 194, 122);
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
+}
+
+.categoryBox:hover {
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+    transition: 0.2s;
 }
 
 .catalogBox {
