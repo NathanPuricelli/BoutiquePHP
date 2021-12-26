@@ -23,6 +23,18 @@ class Product extends Model{
         }
         else
             return;
+    }
 
+    public function addReview($id_product, $name, $photoUser, $stars, $title, $description)
+    {
+        $sql = "INSERT INTO reviews (id_product, name_user, photo_user, stars, title, description)
+                 VALUES (?, ?, ?, ?, ?, ?);";
+        try{
+            $this->executerRequete($sql, array($id_product, $name, $photoUser, $stars, $title, $description));
+        }
+        catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+        
     }
 };
