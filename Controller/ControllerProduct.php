@@ -12,12 +12,15 @@ class ControllerProduct {
     }
 
 // Affiche la liste de tous les trucs à acheter
-    public function showProduct($id) {
+    public function ctrlAddReview($id_product, $name, $photoUser, $stars, $title, $description)
+    {
+        $this->product->addReview($id_product, $name, $photoUser, $stars, $title, $description);
+    }
+
+    public function showProduct($id, $errormessage) {
         $product = $this->product->getProduct($id);
         $reviews = $this->product->getReviews($id);
         $view = new View("Product");
-        $view->generer(array('product' => $product, 'reviews' => $reviews));
+        $view->generer(array('product' => $product, 'reviews' => $reviews, 'errormessage' => $errormessage));
     }
-
 }
-

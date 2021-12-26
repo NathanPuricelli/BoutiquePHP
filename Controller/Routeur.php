@@ -31,15 +31,30 @@ class Routeur {
                 }
                 else if(($_GET['page'] == 'product') && (isset($_GET['id']))) {
                     $id = intval($_GET['id']);
-                    $this->ctrlProduct->showProduct($id);
+                    $errormessage="<p style='color:red;'>"; // le message d'erreur va contenir tous les problèmmes du formulaire 
+                    $continue = true; // Booléen attestant la validité du formulaire
+                    if (isset($_POST["confirm-review"])) //Si le formulaire a ete rempli au moins une fois
+                    {
+                        if (strlen($_POST["review_form_title"]) < 1) {$errormessage .= "<br> Le titre doit faire au moins une lettre"; $continue=false;}
+                        if (strlen($_POST["review_form_description"]) < 1) {$errormessage .= "<br> La description doit faire au moins une lettre"; $continue=false;} // Si la description est vide on affiche l'erreur et on déclare comme invalide le formulaire
+                        if (strlen($_POST["review_form_name_user"]) < 1) {$errormessage .= "<br> Veuillez renseigner votre nom"; $continue=false;}
+
+                        if($continue) // si le formulaire est valide
+                        {
+                            $this->ctrlProduct->ctrlAddReview(intval($_GET['id']), $_POST["review_form_name_user"], $_POST["review_form_photo_user"], $_POST["review_form_stars"],
+                                                                    $_POST["review_form_title"], $_POST["review_form_description"]);
+                            header("Location: index.php?page=product&id=".$_GET['id']);//on redirige vers la page du produit
+                        }
+                    }
+                    $errormessage .= "</p>"; //Fin de la chaine d'erreurs                    
+                    $this->ctrlProduct->showProduct($id, $errormessage);
 
                 }
-                /*else if () {
 
-                }*/
-                else
+                else{
                     throw new Exception("Action non valide");
-            }
+                }
+            }            
             else {
                 $this->ctrlCatalog->accueil(0);
             }
