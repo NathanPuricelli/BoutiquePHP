@@ -17,7 +17,7 @@ class ControllerCart {
     }
     
     public function showCartContent() {
-        // Affiche la liste des arcticles dans le panier, et les informations pour regler
+        // Affiche la liste des articles dans le panier, et les informations pour regler
         $products = $this->cart->getCartContent();
         $view = new View("Cart");
         $view->generer(array('products' => $products));

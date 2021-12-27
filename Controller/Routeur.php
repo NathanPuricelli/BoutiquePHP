@@ -3,17 +3,21 @@
 require_once 'Controller/ControllerCatalog.php';
 require_once 'Controller/ControllerProduct.php';
 require_once 'Controller/ControllerCart.php';
+require_once 'Controller/ControllerLogin.php';
+
 require_once 'View/View.php';
 class Routeur {
 
     private $ctrlCatalog;
     private $ctrlProduct;
     private $ctrlCart;
+    private $ctrlLogin;
 
     public function __construct() {
         $this->ctrlCatalog = new ControllerCatalog();
         $this->ctrlProduct = new ControllerProduct();
         $this->ctrlCart = new ControllerCart();
+        $this->ctrlLogin = new ControllerLogin();
     }
 
     // Route une requête entrante : exécution l'action associée
@@ -21,11 +25,10 @@ class Routeur {
         try {
             if (isset($_GET['page'])) {
                 if ($_GET['page'] == 'catalog') {
-                    if (isset($_GET['cat'])){
+                    if (isset($_GET['cat'])) {
                         $this->ctrlCatalog->accueil(intval($_GET['cat']));
-
                     }
-                    else{
+                    else {
                         $this->ctrlCatalog->accueil(0);
                     }
                 }
@@ -43,12 +46,24 @@ class Routeur {
                         {
                             $this->ctrlProduct->ctrlAddReview(intval($_GET['id']), $_POST["review_form_name_user"], $_POST["review_form_photo_user"], $_POST["review_form_stars"],
                                                                     $_POST["review_form_title"], $_POST["review_form_description"]);
-                            header("Location: index.php?page=product&id=".$_GET['id']);//on redirige vers la page du produit
+                            header("Location: index.php?page=product&id=".$_GET['id']."#addReviewSection");//on redirige vers la page du produit
                         }
                     }
-                    $errormessage .= "</p>"; //Fin de la chaine d'erreurs                    
+                    $errormessage .= "</p>"; //Fin de la chaine d'erreurs
                     $this->ctrlProduct->showProduct($id, $errormessage);
 
+                } 
+                else if($_GET['page'] == 'login') {
+                    if (isset($_POST["login-request"])) {
+                        $username = $_POST["login_form_username"];
+                        $hashedPassword = sha1($_POST["login_form_password"]);
+                        
+                        $query = $this->ctrlLogin->ctrlGetUser($username, $hashedPassword);
+
+                        $this->ctrlLogin->showLoginPage();
+                    } else {
+                        $this->ctrlLogin->showLoginPage();
+                    }
                 }
 
                 else{

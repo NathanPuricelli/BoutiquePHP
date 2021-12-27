@@ -1,0 +1,13 @@
+<?php
+require_once 'Model.php';
+class Login extends Model{
+    public function getUser($username, $hashedPassword) {
+        $sql = "SELECT * FROM logins WHERE username = ? AND password = ?";
+        $query = $this->executerRequete($sql, array($username, $hashedPassword));
+        if ($query->rowCount() > 0) {
+            return $query;
+        }
+        else
+            return null;
+    }
+};

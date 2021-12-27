@@ -77,7 +77,7 @@
 
     </div>
 
-    <div class = "container">
+    <div class = "container" id="addReviewSection">
         <?php echo $errormessage;
         echo ("<form action=\"index.php?page=product&id=".$product['id']." \" method='POST'"); ?>
         <label for='review_form_name_user'>Nom :</label>

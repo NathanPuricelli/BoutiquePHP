@@ -14,7 +14,7 @@ class View {
     }
 
     // Génère et affiche la vue
-    public function generer($data) {
+    public function generer($data = null) {
         // Génération de la partie spécifique de la vue
         $contenu = $this->genererFichier($this->file, $data);
         // Génération du gabarit commun utilisant la partie spécifique
@@ -28,7 +28,7 @@ class View {
     private function genererFichier($file, $data) {
         if (file_exists($file)) {
             // Rend les éléments du tableau $data accessibles dans la vue
-            extract($data);
+            if ($data != null) extract($data);
             // Démarrage de la temporisation de sortie
             ob_start();
             // Inclut le file vue

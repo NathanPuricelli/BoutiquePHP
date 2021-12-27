@@ -28,6 +28,8 @@ Controller :
             Pour les non connectés avec les variables de session
             Pour les connectés.
         -Page admin pour check tout (vérifier que l'admin est connecté)
+        -CSS de addReview
+        -Recherche dans catalogue
         -connexion : 
             -Page connexion  :
                 -Inscription et connexion

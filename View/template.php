@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+if (!isset($_SESSION["logged"])) { //Si la variable de connexion n'est pas initialisée
+  $_SESSION["logged"] = false;//On l'initialise à false
+}
+
+?>
+
+
 <!doctype html>
 <html lang="fr">
     <head>
@@ -32,9 +42,17 @@
                 <li class="nav-item">
                   <a class="nav-link" href="#">Panier</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="?page=login">Connexion</a>
-                </li>
+                <?php
+                  if ($_SESSION["logged"]) {
+                    echo '<li class="nav-item">
+                            <a class="nav-link" href="?page=login">Déconnexion</a>
+                          </li>';
+                  } else {
+                    echo '<li class="nav-item">
+                            <a class="nav-link" href="?page=login">Connexion</a>
+                          </li>';
+                  }
+                ?>
               </ul>
 
               <div class="search-bar">

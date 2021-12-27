@@ -1,4 +1,4 @@
-<?php $this->titre = $product['name']." | Infos"; ?>
+<?php $this->titre = $product['name']; ?>
 <!-- PARTIE PANIER -->
 
 <div class="container">
