@@ -56,10 +56,15 @@ class Routeur {
                 else if($_GET['page'] == 'login') {
                     if (isset($_POST["login-request"])) {
                         $username = $_POST["login_form_username"];
-                        $hashedPassword = sha1($_POST["login_form_password"]);
+                        $hashedPassword = sha1($_POST["login_form_password"]); //Exemple de login : username : Aymeric0, mdp : lol
                         
                         $query = $this->ctrlLogin->ctrlGetUser($username, $hashedPassword);
-
+                        if ($query == null) {
+                            echo "Toi je te connais pas";
+                        } else {
+                            $q = $query->fetch();
+                            echo "Bienvenue ".$q["username"];
+                        }
                         $this->ctrlLogin->showLoginPage();
                     } else {
                         $this->ctrlLogin->showLoginPage();
