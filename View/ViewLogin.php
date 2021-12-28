@@ -1,8 +1,5 @@
 <?php $this->titre = "Connexion"; ?>
 
-
-
-
 <div class="container">
     <div class="text-center">
         <h1>Connexion</h1>

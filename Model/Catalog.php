@@ -1,6 +1,6 @@
 <?php
 require_once 'Model.php';
-class Catalog extends Model{
+class Catalog extends Model {
     public function getProducts($cat_id) {
         if($cat_id != 0) {
             $sql = "SELECT * FROM products WHERE cat_id = ?";

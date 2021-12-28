@@ -1,6 +1,6 @@
 <?php
 require_once 'Model.php';
-class Product extends Model{
+class Product extends Model {
     public function getProduct($id)
     {
         $sql = "SELECT * FROM products WHERE id = ?";

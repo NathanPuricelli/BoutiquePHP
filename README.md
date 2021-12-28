@@ -37,4 +37,7 @@ Controller :
             A la connexion, on donne un id à l'utilisateur via $SESSION["id"]
             si l'utilisateur ajoute au panier, on créé une commande avec custommer_id = $SESSION["id"]
 
+    Idée :
+        -Sur template.php, afficher un onglet 'Profil' même quand l'utilisateur n'est pas un admin ?
+
 

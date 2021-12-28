@@ -4,6 +4,7 @@ require_once 'Controller/ControllerCatalog.php';
 require_once 'Controller/ControllerProduct.php';
 require_once 'Controller/ControllerCart.php';
 require_once 'Controller/ControllerLogin.php';
+require_once 'Controller/ControllerRegister.php';
 
 require_once 'View/View.php';
 class Routeur {
@@ -12,12 +13,14 @@ class Routeur {
     private $ctrlProduct;
     private $ctrlCart;
     private $ctrlLogin;
+    private $ctrlRegister;
 
     public function __construct() {
         $this->ctrlCatalog = new ControllerCatalog();
         $this->ctrlProduct = new ControllerProduct();
         $this->ctrlCart = new ControllerCart();
         $this->ctrlLogin = new ControllerLogin();
+        $this->ctrlRegister = new ControllerRegister();
     }
 
     // Route une requête entrante : exécution l'action associée
@@ -34,13 +37,13 @@ class Routeur {
                 }
                 else if(($_GET['page'] == 'product') && (isset($_GET['id']))) {
                     $id = intval($_GET['id']);
-                    $errormessage="<p style='color:red;'>"; // le message d'erreur va contenir tous les problèmmes du formulaire 
+                    $errorMessage="<p style='color:red;'>"; // le message d'erreur va contenir tous les problèmmes du formulaire 
                     $continue = true; // Booléen attestant la validité du formulaire
                     if (isset($_POST["confirm-review"])) //Si le formulaire a ete rempli au moins une fois
                     {
-                        if (strlen($_POST["review_form_title"]) < 1) {$errormessage .= "<br> Le titre doit faire au moins une lettre"; $continue=false;}
-                        if (strlen($_POST["review_form_description"]) < 1) {$errormessage .= "<br> La description doit faire au moins une lettre"; $continue=false;} // Si la description est vide on affiche l'erreur et on déclare comme invalide le formulaire
-                        if (strlen($_POST["review_form_name_user"]) < 1) {$errormessage .= "<br> Veuillez renseigner votre nom"; $continue=false;}
+                        if (strlen($_POST["review_form_title"]) < 1) {$errorMessage .= "<br> Le titre doit faire au moins une lettre"; $continue=false;}
+                        if (strlen($_POST["review_form_description"]) < 1) {$errorMessage .= "<br> La description doit faire au moins une lettre"; $continue=false;} // Si la description est vide on affiche l'erreur et on déclare comme invalide le formulaire
+                        if (strlen($_POST["review_form_name_user"]) < 1) {$errorMessage .= "<br> Veuillez renseigner votre nom"; $continue=false;}
 
                         if($continue) // si le formulaire est valide
                         {
@@ -49,25 +52,75 @@ class Routeur {
                             header("Location: index.php?page=product&id=".$_GET['id']."#addReviewSection");//on redirige vers la page du produit
                         }
                     }
-                    $errormessage .= "</p>"; //Fin de la chaine d'erreurs
-                    $this->ctrlProduct->showProduct($id, $errormessage);
+                    $errorMessage .= "</p>"; //Fin de la chaine d'erreurs
+                    $this->ctrlProduct->showProduct($id, $errorMessage);
 
                 } 
                 else if($_GET['page'] == 'login') {
-                    if (isset($_POST["login-request"])) {
-                        $username = $_POST["login_form_username"];
-                        $hashedPassword = sha1($_POST["login_form_password"]); //Exemple de login : username : Aymeric0, mdp : lol
-                        
-                        $query = $this->ctrlLogin->ctrlGetUser($username, $hashedPassword);
-                        if ($query == null) {
-                            echo "Toi je te connais pas";
+                    if (!$_SESSION["logged"]) { //Si l'utilisateur n'est pas connecté : affichage de la page connexion
+                        if (isset($_POST["login-request"])) {
+                            $username = $_POST["login_form_username"];
+                            $hashedPassword = sha1($_POST["login_form_password"]); //Exemple de login : username : Aymeric0, mdp : lol
+                            
+                            $query = $this->ctrlLogin->ctrlGetUser($username, $hashedPassword);
+                            if ($query == null) {
+                                echo "Toi je te connais pas";
+                                $this->ctrlLogin->showLoginPage();
+                            } else { //La connexion a bien été faite ici
+                                $q = $query->fetch(); //On conserve dans $q la premiere ligne de la requete $query, c'est à dire la seule
+                                echo "Bienvenue " . $q["username"] . " !";
+                                $_SESSION["logged"] = true;
+                                $_SESSION["username"] = $username;
+                                header('Location: index.php'); //Et on redirige l'utilisateur vers l'accueil
+                            }
                         } else {
-                            $q = $query->fetch();
-                            echo "Bienvenue ".$q["username"];
+                            $this->ctrlLogin->showLoginPage();
                         }
-                        $this->ctrlLogin->showLoginPage();
+                    } else { //Si l'utilisateur est connecté, on le déconnecte
+                        $_SESSION["logged"] = false;
+                        $_SESSION["username"] = null;
+                        header('Location: index.php');
+                    }
+                }
+                else if($_GET['page'] == 'register' && !$_SESSION["logged"]) {
+                    if (isset($_POST["register-request"])) {
+                        $username = $_POST["register_form_username"];
+                        $hashedPassword = sha1($_POST["register_form_password"]);
+                        $hashedPasswordConfirmation = sha1($_POST["register_form_password_confirmation"]);
+                        if (strlen($username) < 1) {
+                            $errorMessage = "Veuillez entrer un nom d'utilisateur";
+                            echo $errorMessage;
+                            $this->ctrlRegister->showRegisterPage(); //Temporaire
+                        } 
+                        else if (strlen($_POST["register_form_password"]) < 1) {
+                            $errorMessage = "Veuillez entrer un nom mot de passe";
+                            echo $errorMessage;
+                            $this->ctrlRegister->showRegisterPage(); //Temporaire
+                        } 
+                        else if (strlen($_POST["register_form_password_confirmation"]) < 1) {
+                            $errorMessage = "Veuillez confirmer votre mot de passe";
+                            echo $errorMessage;
+                            $this->ctrlRegister->showRegisterPage(); //Temporaire
+                        }
+                        else if ($hashedPasswordConfirmation != $hashedPassword) {
+                            $errorMessage = "Le mot de passe n'a pas été correctement confirmé";
+                            echo $errorMessage;
+                            $this->ctrlRegister->showRegisterPage(); //Temporaire
+                        }
+                        else if ($this->ctrlRegister->ctrlUserAlreadyExists($username)) {
+                            $errorMessage = "Ce nom d'utilisateur existe déjà";
+                            echo $errorMessage;
+                            $this->ctrlRegister->showRegisterPage(); //Temporaire
+                        }
+                        else { //L'inscription est valide, on peut enregister l'utilisateur
+                            $this->ctrlRegister->ctrlRegisterUser($username, $hashedPassword);
+                            $_SESSION["logged"] = true; //Une fois enregistré on connecte l'utilisateur
+                            $_SESSION["username"] = $username;
+                            header('Location: index.php');
+                        }
+
                     } else {
-                        $this->ctrlLogin->showLoginPage();
+                        $this->ctrlRegister->showRegisterPage();
                     }
                 }
 

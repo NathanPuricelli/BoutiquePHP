@@ -5,27 +5,27 @@
     <div class="text-center">
         <h1>Qu'est-ce qui vous ferait plaisir ?</h1>
     </div>
-    <a href="index.php?page=catalog">
     <?php if($category_name['name'] == 'Toutes les categories'):?>
     <div class="categoryBox selected">
     <?php else:?>
     <div class="categoryBox">
     <?php endif;?>
-        <h4>TOUS NOS PRODUITS</h4>
+        <a href="index.php?page=catalog">
+            <h4>TOUS NOS PRODUITS</h4>
+        </a>
     </div>
-    </a>
 
     <?php foreach ($categories as $categorie):?>
     
-    <a href="<?= "index.php?page=catalog&cat=" . $categorie['id'] ?>">
     <?php if($category_name['name'] == $categorie['name']):?>
     <div class="categoryBox selected">
     <?php else:?>
     <div class="categoryBox">
     <?php endif;?>
-        <h4><?= strtoupper($categorie['name']) ?></h4>
+        <a href="<?= "index.php?page=catalog&cat=" . $categorie['id'] ?>">
+            <h4><?= strtoupper($categorie['name']) ?></h4>
+        </a>
     </div>
-    </a>
         
     <?php endforeach; ?>
 

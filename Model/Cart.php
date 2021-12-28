@@ -1,6 +1,6 @@
 <?php
 require_once 'Model.php';
-class Cart extends Model{
+class Cart extends Model {
     public function getCartContent()
     {
         /*
