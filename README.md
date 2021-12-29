@@ -15,8 +15,6 @@ Controller :
 
 
     To do : 
-        -Product : 
-            Ajouter un commentaire via un formulaire en bas de page 
         -Panier :
             Affichage des articles du panier (on créé une commande)
             Suppression d'un article du panier avec actualisation
