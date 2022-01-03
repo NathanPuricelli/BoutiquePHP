@@ -37,6 +37,7 @@ Controller :
 
     Idée :
         -Sur template.php, afficher un onglet 'Profil' même quand l'utilisateur n'est pas un admin ?
+        -Vérif sur l'adresse mail pour pas créer plusieurs customers identiques
 
     Vraiment pas urgent :
         -Gérer bug sur la page inscription quand on efface ses données de navigation depuis celle ci

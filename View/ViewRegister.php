@@ -36,11 +36,11 @@
             <div class="row">
                 <div class="col">
                     <label for="inputFirstName">Prénom</label>
-                    <input type="text" class="form-control" name="register_form_username" placeholder="Jean" required>
+                    <input type="text" class="form-control" name="register_form_firstname" placeholder="Jean" required>
                 </div>
                 <div class="col">
                     <label for="inputSurname">Nom</label>
-                    <input type="password" class="form-control" name="register_form_password" placeholder="De la Fontaine" required>
+                    <input type="text" class="form-control" name="register_form_surname" placeholder="De la Fontaine" required>
                 </div>
             </div>
             

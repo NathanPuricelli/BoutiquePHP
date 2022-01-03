@@ -107,7 +107,17 @@ class Routeur {
                             $this->ctrlRegister->showRegisterPage($errorMessage);
                         }
                         else { //L'inscription est valide, on peut enregister l'utilisateur, en récupérant les informations personnelles
-                            $this->ctrlRegister->ctrlRegisterUser($username, $hashedPassword);
+                            $firstname = $_POST["register_form_firstname"];
+                            $surname = $_POST["register_form_surname"] ;
+                            $add1 = $_POST["register_form_add1"];
+                            $add2 = $_POST["register_form_add2"];
+                            $city = $_POST["register_form_city"];
+                            $postcode = $_POST["register_form_postcode"];
+                            $phone = $_POST["register_form_phone"];
+                            $email = $_POST["register_form_email"];
+
+                            $this->ctrlRegister->ctrlRegisterUser($username, $hashedPassword, $firstname, 
+                                $surname, $add1, $add2, $city, $postcode, $phone, $email);
                             $_SESSION["logged"] = true; //Une fois enregistré on connecte l'utilisateur
                             $_SESSION["username"] = $username;
 
