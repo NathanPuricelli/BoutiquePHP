@@ -69,12 +69,12 @@ if (!isset($_SESSION["logged"])) { //Si la variable de connexion n'est pas initi
             </div>
           </div>
           
-      </nav>
-            <div id="contenu">
-                <?= $contenu ?>
-            </div> <!-- #contenu -->
+        </nav>
+          <div id="contenu">
+              <?= $contenu ?>
+          </div> <!-- #contenu -->
             
-            <footer id="contact">
+        <footer id="contact">
             <div id="deuxiemeTrait"></div>
             <div id="copyrightEtIcons">
                 <div id="copyright">

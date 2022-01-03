@@ -38,4 +38,7 @@ Controller :
     Idée :
         -Sur template.php, afficher un onglet 'Profil' même quand l'utilisateur n'est pas un admin ?
 
+    Vraiment pas urgent :
+        -Gérer bug sur la page inscription quand on efface ses données de navigation depuis celle ci
+
 

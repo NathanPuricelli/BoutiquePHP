@@ -50,7 +50,6 @@
     <div class="text-center">
         <h2>Avis des consommateurs sur ce produit</h2>
     </div>
-
     <div class="container">
 
         <?php foreach ($reviews as $review):?>
@@ -77,44 +76,52 @@
 
     </div>
 
-    <div class = "container" id="addReviewSection">
-        <?php echo $errormessage;
-        echo ("<form action=\"index.php?page=product&id=".$product['id']." \" method='POST'"); ?>
-        <label for='review_form_name_user'>Nom :</label>
-        <input type='text' id = 'review_form_name_user' name = 'review_form_name_user'/>
-        <br>
-        <p>Sexe : </p>
-        <input type="radio" name = "review_form_photo_user" id = "review_form_photo_user_male" value="homme.jpg" checked>
-        <label for="review_form_photo_user_male">Homme</label>
-        <input type="radio" name = "review_form_photo_user" id = "review_form_photo_user_female" value="femme.png">
-        <label for="review_form_photo_user_female">Femme</label>
-        <br>
-        <p>Note /5 :</p>
-        <input type="radio" name = "review_form_stars" id = "review_form_stars_0" value="0" checked>
-        <label for="review_form_stars_male">0</label>
-        <input type="radio" name = "review_form_stars" id = "review_form_stars_1" value="1">
-        <label for="review_form_stars_male">1</label>
-        <input type="radio" name = "review_form_stars" id = "review_form_stars_2" value="2">
-        <label for="review_form_stars_male">2</label>
-        <input type="radio" name = "review_form_stars" id = "review_form_stars_3" value="3">
-        <label for="review_form_stars_male">3</label>
-        <input type="radio" name = "review_form_stars" id = "review_form_stars_4" value="4">
-        <label for="review_form_stars_male">4</label>
-        <input type="radio" name = "review_form_stars" id = "review_form_stars_5" value="5">
-        <label for="review_form_stars_male">5</label>
-        <br>
-        <label for='form_name_title'>Titre :</label>
-        <input type='text' id = 'review_form_title' name = 'review_form_title'/>
-        <br>
-        <label for='review_form_description'>Description :</label>
-        <textarea name='review_form_description' id='review_form_description' rows='4' cols='50'></textarea>
-        <br>
 
+    <div class="text-center">
+        <h2>Ajouter un commentaire</h2>
+    </div>
+    <div class="container">
+        <div class="addReviewSection">
+            <?php 
+            echo $errormessage;
+            echo ("<form class='formAddReview' action=\"index.php?page=product&id=".$product['id']." \" method='POST'"); 
+            ?>
+            
+            <label for="review_form_name_user">Nom</label>
+            <input type="text" class="review_form_name_user" name="review_form_name_user" required>
 
-        <input type = 'submit' name = 'confirm-review' value="poster">
+            <input type="radio" name = "review_form_photo_user" id = "review_form_photo_user_male" value="homme.jpg" checked>
+            <label for="review_form_photo_user_male">Homme</label>
+            <input type="radio" name = "review_form_photo_user" id = "review_form_photo_user_female" value="femme.png">
+            <label for="review_form_photo_user_female">Femme</label>
 
-        </form>
+            
+            <br/>
+            <input type="radio" name = "review_form_stars" id = "review_form_stars_0" value="0" checked>
+            <label for="review_form_stars_male">0</label>
+            <input type="radio" name = "review_form_stars" id = "review_form_stars_1" value="1">
+            <label for="review_form_stars_male">1</label>
+            <input type="radio" name = "review_form_stars" id = "review_form_stars_2" value="2">
+            <label for="review_form_stars_male">2</label>
+            <input type="radio" name = "review_form_stars" id = "review_form_stars_3" value="3">
+            <label for="review_form_stars_male">3</label>
+            <input type="radio" name = "review_form_stars" id = "review_form_stars_4" value="4">
+            <label for="review_form_stars_male">4</label>
+            <input type="radio" name = "review_form_stars" id = "review_form_stars_5" value="5">
+            <label for="review_form_stars_male">5</label>
 
+            <br/>
+            <label for='form_name_title'>Titre :</label>
+            <input type='text' id = 'review_form_title' name = 'review_form_title'/>
+
+            <br/>
+            <label for='review_form_description'>Description :</label>
+            <textarea name='review_form_description' id='review_form_description' rows='4' cols='50' style="resize: none;"></textarea>
+
+            <br/>
+            <button class="btn1" type="submit" name='confirm-review'>Poster</button>
+            </form>
+        </div>
     </div>
 
 </div>

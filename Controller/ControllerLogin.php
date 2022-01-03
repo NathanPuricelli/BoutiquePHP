@@ -15,9 +15,9 @@ class ControllerLogin {
         return $this->login->getUser($username, $hashedPassword);
     }
     
-    public function showLoginPage() {
+    public function showLoginPage($errorMessage = "") {
         $view = new View("Login");
-        $view->generer();
+        $view->generer(array('errorMessage' => $errorMessage));
     }
 
 }

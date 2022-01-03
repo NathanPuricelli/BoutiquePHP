@@ -19,9 +19,9 @@ class ControllerRegister {
         $this->register->registerUser($username, $hashedPassword);
     }
     
-    public function showRegisterPage() {
+    public function showRegisterPage($errorMessage = "") {
         $view = new View("Register");
-        $view->generer();
+        $view->generer(array('errorMessage' => $errorMessage));
     }
 
 }

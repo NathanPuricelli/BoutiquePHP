@@ -64,11 +64,10 @@ class Routeur {
                             
                             $query = $this->ctrlLogin->ctrlGetUser($username, $hashedPassword);
                             if ($query == null) {
-                                echo "Toi je te connais pas";
-                                $this->ctrlLogin->showLoginPage();
+                                $errorMessage = "Utilisateur non reconnu, veuillez vérifier les informations entrées";
+                                $this->ctrlLogin->showLoginPage($errorMessage);
                             } else { //La connexion a bien été faite ici
-                                $q = $query->fetch(); //On conserve dans $q la premiere ligne de la requete $query, c'est à dire la seule
-                                echo "Bienvenue " . $q["username"] . " !";
+                                //$q = $query->fetch(); //On conserve dans $q la premiere ligne de la requete $query, c'est à dire la seule
                                 $_SESSION["logged"] = true;
                                 $_SESSION["username"] = $username;
                                 header('Location: index.php'); //Et on redirige l'utilisateur vers l'accueil
@@ -89,33 +88,30 @@ class Routeur {
                         $hashedPasswordConfirmation = sha1($_POST["register_form_password_confirmation"]);
                         if (strlen($username) < 1) {
                             $errorMessage = "Veuillez entrer un nom d'utilisateur";
-                            echo $errorMessage;
-                            $this->ctrlRegister->showRegisterPage(); //Temporaire
+                            $this->ctrlRegister->showRegisterPage($errorMessage);
                         } 
                         else if (strlen($_POST["register_form_password"]) < 1) {
                             $errorMessage = "Veuillez entrer un nom mot de passe";
-                            echo $errorMessage;
-                            $this->ctrlRegister->showRegisterPage(); //Temporaire
+                            $this->ctrlRegister->showRegisterPage($errorMessage);
                         } 
                         else if (strlen($_POST["register_form_password_confirmation"]) < 1) {
                             $errorMessage = "Veuillez confirmer votre mot de passe";
-                            echo $errorMessage;
-                            $this->ctrlRegister->showRegisterPage(); //Temporaire
+                            $this->ctrlRegister->showRegisterPage($errorMessage);
                         }
                         else if ($hashedPasswordConfirmation != $hashedPassword) {
                             $errorMessage = "Le mot de passe n'a pas été correctement confirmé";
-                            echo $errorMessage;
-                            $this->ctrlRegister->showRegisterPage(); //Temporaire
+                            $this->ctrlRegister->showRegisterPage($errorMessage);
                         }
                         else if ($this->ctrlRegister->ctrlUserAlreadyExists($username)) {
                             $errorMessage = "Ce nom d'utilisateur existe déjà";
-                            echo $errorMessage;
-                            $this->ctrlRegister->showRegisterPage(); //Temporaire
+                            $this->ctrlRegister->showRegisterPage($errorMessage);
                         }
-                        else { //L'inscription est valide, on peut enregister l'utilisateur
+                        else { //L'inscription est valide, on peut enregister l'utilisateur, en récupérant les informations personnelles
                             $this->ctrlRegister->ctrlRegisterUser($username, $hashedPassword);
                             $_SESSION["logged"] = true; //Une fois enregistré on connecte l'utilisateur
                             $_SESSION["username"] = $username;
+
+                            
                             header('Location: index.php');
                         }
 
