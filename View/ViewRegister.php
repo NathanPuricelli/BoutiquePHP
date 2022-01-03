@@ -66,11 +66,11 @@
             <div class="row">
                 <div class="col">
                     <label for="inputPhone">Numéro de téléphone</label>
-                    <input type="text" class="form-control" name="register_form_phone" placeholder="Ex : 06 51 01 22 94" required>
+                    <input type="text" class="form-control" name="register_form_phone" placeholder="Ex : 06 12 34 56 78" required>
                 </div>
                 <div class="col">
                     <label for="inputEMail">Adresse e-mail</label>
-                    <input type="text" class="form-control" name="register_form_email" placeholder="adresse.email@exemple.com" required>
+                    <input type="text" class="form-control" name="register_form_email" placeholder="nom@exemple.com" required>
                 </div>
             </div>
             <button class="btn1" type="submit" name='register-request'>S'inscrire</button>

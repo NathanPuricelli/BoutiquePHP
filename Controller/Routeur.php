@@ -86,6 +86,8 @@ class Routeur {
                         $username = $_POST["register_form_username"];
                         $hashedPassword = sha1($_POST["register_form_password"]);
                         $hashedPasswordConfirmation = sha1($_POST["register_form_password_confirmation"]);
+
+                        $email = $_POST["register_form_email"];//On récupère également l'adresse mail pour effectuer une vérification sur la table customers
                         if (strlen($username) < 1) {
                             $errorMessage = "Veuillez entrer un nom d'utilisateur";
                             $this->ctrlRegister->showRegisterPage($errorMessage);
@@ -106,6 +108,10 @@ class Routeur {
                             $errorMessage = "Ce nom d'utilisateur existe déjà";
                             $this->ctrlRegister->showRegisterPage($errorMessage);
                         }
+                        else if ($this->ctrlRegister->ctrlEMailAlreadyExists($email)) {
+                            $errorMessage = "Cette adresse mail a déjà été utilisée";
+                            $this->ctrlRegister->showRegisterPage($errorMessage);
+                        }
                         else { //L'inscription est valide, on peut enregister l'utilisateur, en récupérant les informations personnelles
                             $firstname = $_POST["register_form_firstname"];
                             $surname = $_POST["register_form_surname"] ;
@@ -114,7 +120,6 @@ class Routeur {
                             $city = $_POST["register_form_city"];
                             $postcode = $_POST["register_form_postcode"];
                             $phone = $_POST["register_form_phone"];
-                            $email = $_POST["register_form_email"];
 
                             $this->ctrlRegister->ctrlRegisterUser($username, $hashedPassword, $firstname, 
                                 $surname, $add1, $add2, $city, $postcode, $phone, $email);
