@@ -4,6 +4,6 @@ require 'Controller/Router.php';
 
 session_start();
 
-$routeur = new Router();
-$routeur->rooting();
+$router = new Router();
+$router->rooting();
 
