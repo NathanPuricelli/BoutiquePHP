@@ -83,7 +83,6 @@
     <div class="container">
         <div class="addReviewSection">
             <?php 
-            echo $errormessage;
             echo ("<form class='formAddReview' action=\"index.php?page=product&id=".$product['id']." \" method='POST'"); 
             ?>
             
@@ -112,11 +111,11 @@
 
             <br/>
             <label for='form_name_title'>Titre :</label>
-            <input type='text' id = 'review_form_title' name = 'review_form_title'/>
+            <input type='text' id = 'review_form_title' name = 'review_form_title' required/>
 
             <br/>
             <label for='review_form_description'>Description :</label>
-            <textarea name='review_form_description' id='review_form_description' rows='4' cols='50' style="resize: none;"></textarea>
+            <textarea name='review_form_description' id='review_form_description' rows='4' cols='50' required style="resize: none;"></textarea>
 
             <br/>
             <button class="btn1" type="submit" name='confirm-review'>Poster</button>

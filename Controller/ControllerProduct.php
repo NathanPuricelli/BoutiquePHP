@@ -17,10 +17,10 @@ class ControllerProduct {
         $this->product->addReview($id_product, $name, $photoUser, $stars, $title, $description);
     }
 
-    public function showProduct($id, $errormessage) {
+    public function showProduct($id) {
         $product = $this->product->getProduct($id);
         $reviews = $this->product->getReviews($id);
         $view = new View("Product");
-        $view->generate(array('product' => $product, 'reviews' => $reviews, 'errormessage' => $errormessage));
+        $view->generate(array('product' => $product, 'reviews' => $reviews));
     }
 }
