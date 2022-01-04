@@ -6,7 +6,7 @@ class View {
     private $file;
     
     // Titre de la vue (défini dans le file vue)
-    private $titre;
+    private $title;
 
     public function __construct($action) {
         // Détermination du nom du file vue à partir de l'action
@@ -14,18 +14,18 @@ class View {
     }
 
     // Génère et affiche la vue
-    public function generer($data = null) {
+    public function generate($data = null) {
         // Génération de la partie spécifique de la vue
-        $contenu = $this->genererFichier($this->file, $data);
+        $content = $this->generateFile($this->file, $data);
         // Génération du gabarit commun utilisant la partie spécifique
-        $vue = $this->genererFichier('View/template.php',
-                array('titre' => $this->titre, 'contenu' => $contenu));
+        $vue = $this->generateFile('View/template.php',
+                array('title' => $this->title, 'content' => $content));
         // Renvoi de la vue au navigateur
         echo $vue;
     }
 
     // Génère un file vue et renvoie le résultat produit
-    private function genererFichier($file, $data) {
+    private function generateFile($file, $data) {
         if (file_exists($file)) {
             // Rend les éléments du tableau $data accessibles dans la vue
             if ($data != null) extract($data);

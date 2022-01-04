@@ -21,6 +21,6 @@ class ControllerProduct {
         $product = $this->product->getProduct($id);
         $reviews = $this->product->getReviews($id);
         $view = new View("Product");
-        $view->generer(array('product' => $product, 'reviews' => $reviews, 'errormessage' => $errormessage));
+        $view->generate(array('product' => $product, 'reviews' => $reviews, 'errormessage' => $errormessage));
     }
 }

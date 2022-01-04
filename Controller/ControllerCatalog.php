@@ -17,7 +17,7 @@ class ControllerCatalog {
         $categ = $this->catalog->getCategoryName($cat_id);
         $products = $this->catalog->getProducts($cat_id);
         $view = new View("Catalog");
-        $view->generer(array('products' => $products, 'categories' => $categories, 'category_name' => $categ));
+        $view->generate(array('products' => $products, 'categories' => $categories, 'category_name' => $categ));
     }
 
 }

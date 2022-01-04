@@ -19,7 +19,7 @@ if (!isset($_SESSION["logged"])) { //Si la variable de connexion n'est pas initi
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
 
         <link rel="stylesheet" href="assets/css/style.css" />
-        <title><?= $titre ?></title>
+        <title><?= $title ?></title>
     </head>
     <body>
         <div id="global">
@@ -71,7 +71,7 @@ if (!isset($_SESSION["logged"])) { //Si la variable de connexion n'est pas initi
           
         </nav>
           <div id="contenu">
-              <?= $contenu ?>
+              <?= $content ?>
           </div> <!-- #contenu -->
             
         <footer id="contact">

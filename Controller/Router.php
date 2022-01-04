@@ -7,7 +7,7 @@ require_once 'Controller/ControllerLogin.php';
 require_once 'Controller/ControllerRegister.php';
 
 require_once 'View/View.php';
-class Routeur {
+class Router {
 
     private $ctrlCatalog;
     private $ctrlProduct;
@@ -22,9 +22,48 @@ class Routeur {
         $this->ctrlLogin = new ControllerLogin();
         $this->ctrlRegister = new ControllerRegister();
     }
+    
+    public function rooting(){
+        try {
+            if (isset($_GET['page'])) {
+                switch ($_GET['page'])
+                {
+                    case 'catalog':
+                        //routCatalog();
+                        break;
+                    
+                    case 'product':
+                        if(isset($_GET['id'])){
+                            //routProduct();
+                            break;
+                        }
+                        else {
+                            
+                        }
+                }
+
+                if ($_GET['page'] == 'catalog'){
+                    // routCatalog();
+                }
+                
+                else if(($_GET['page'] == 'product') && (isset($_GET['id']))) {
+                    //roytProduct();
+                }
+                else if
+
+            }
+
+
+        }
+
+        catch (Exception $e) {
+            $this->erreur($e->getMessage());
+        }
+
+    }
 
     // Route une requête entrante : exécution l'action associée
-    public function routerRequete() {
+    public function routRequest() {
         try {
             if (isset($_GET['page'])) {
                 if ($_GET['page'] == 'catalog') {
@@ -148,9 +187,13 @@ class Routeur {
         }
     }
 
+    private function rr(){
+
+    }
+
     // Affiche une erreur
     private function erreur($msgErreur) {
         $vue = new View("Error");
-        $vue->generer(array('msgErreur' => $msgErreur));
+        $vue->generate(array('msgErreur' => $msgErreur));
     }
 }

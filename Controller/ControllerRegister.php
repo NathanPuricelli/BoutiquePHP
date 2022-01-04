@@ -29,7 +29,7 @@ class ControllerRegister {
     
     public function showRegisterPage($errorMessage = "") {
         $view = new View("Register");
-        $view->generer(array('errorMessage' => $errorMessage));
+        $view->generate(array('errorMessage' => $errorMessage));
     }
 
 }

@@ -1,4 +1,4 @@
-<?php $this->titre = "Connexion"; ?>
+<?php $this->title = "Connexion"; ?>
 
 <div class="container-md">
     <div class="text-center">

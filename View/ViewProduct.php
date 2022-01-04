@@ -1,4 +1,4 @@
-<?php $this->titre = $product['name']." | Infos"; ?>
+<?php $this->title = $product['name']." | Infos"; ?>
 
 
 
@@ -57,8 +57,8 @@
             <div class="col-1 reviewUserPhoto">
             <?php 
             $image = $review['photo_user'];
-            $chemin="assets/img/".$image;
-            $img = "<img src = \"" . $chemin ."\" class =\"reviewImg\">";
+            $path="assets/img/".$image;
+            $img = "<img src = \"" . $path ."\" class =\"reviewImg\">";
             echo ($img);
             ?>
             </div>

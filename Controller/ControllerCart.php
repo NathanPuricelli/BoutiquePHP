@@ -20,7 +20,7 @@ class ControllerCart {
         // Affiche la liste des articles dans le panier, et les informations pour regler
         $products = $this->cart->getCartContent();
         $view = new View("Cart");
-        $view->generer(array('products' => $products));
+        $view->generate(array('products' => $products));
     }
 
 }

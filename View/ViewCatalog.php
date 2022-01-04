@@ -1,4 +1,4 @@
-<?php $this->titre = "Catalogue"; ?>
+<?php $this->title = "Catalogue"; ?>
 
 
 <div class="container catalog">

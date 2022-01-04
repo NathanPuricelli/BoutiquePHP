@@ -17,7 +17,7 @@ class ControllerLogin {
     
     public function showLoginPage($errorMessage = "") {
         $view = new View("Login");
-        $view->generer(array('errorMessage' => $errorMessage));
+        $view->generate(array('errorMessage' => $errorMessage));
     }
 
 }

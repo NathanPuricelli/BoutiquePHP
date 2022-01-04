@@ -1,9 +1,9 @@
 <?php
 
-require 'Controller/Routeur.php';
+require 'Controller/Router.php';
 
 session_start();
 
-$routeur = new Routeur();
-$routeur->routerRequete();
+$routeur = new Router();
+$routeur->routRequest();
 

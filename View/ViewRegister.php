@@ -1,4 +1,4 @@
-<?php $this->titre = "Inscription"; ?>
+<?php $this->title = "Inscription"; ?>
 
 <div class="container">
     <div class="text-center">
