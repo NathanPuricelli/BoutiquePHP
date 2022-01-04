@@ -86,12 +86,12 @@ class Router {
     }
 
     private function routProduct(){
-        $id = intval($this->getParametre($_GET, 'id'));
+        $id = intval($this->getParameter($_GET, 'id'));
         $continue = true; // Booléen attestant la validité du formulaire
         if (isset($_POST["confirm-review"])) //Si le formulaire a ete rempli au moins une fois
         {
-            $this->ctrlProduct->ctrlAddReview(intval($this->getParametre($_GET, 'id')), $this->getParametre($_POST, "review_form_name_user" ), $this->getParametre($_POST, "review_form_photo_user"), 
-                                                    $this->getParametre($_POST, "review_form_stars"), $this->getParametre($_POST, "review_form_title"), $this->getParametre($_POST, "review_form_description"));
+            $this->ctrlProduct->ctrlAddReview(intval($this->getParameter($_GET, 'id')), $this->getParameter($_POST, "review_form_name_user" ), $this->getParameter($_POST, "review_form_photo_user"), 
+                                                    $this->getParameter($_POST, "review_form_stars"), $this->getParameter($_POST, "review_form_title"), $this->getParameter($_POST, "review_form_description"));
             header("Location: index.php?page=product&id=".$_GET['id']."#addReviewSection");//on redirige vers la page du produit
             
         }
@@ -100,8 +100,8 @@ class Router {
 
     private function routLogin(){
         if (isset($_POST["login-request"])) {
-            $username = $this->getParametre($_POST, "login_form_username");
-            $hashedPassword = sha1($this->getParametre($_POST, "login_form_password")); //Exemple de login : username : Aymeric0, mdp : lol
+            $username = $this->getParameter($_POST, "login_form_username");
+            $hashedPassword = sha1($this->getParameter($_POST, "login_form_password")); //Exemple de login : username : Aymeric0, mdp : lol
             
             $query = $this->ctrlLogin->ctrlGetUser($username, $hashedPassword);
             if ($query == null) {
@@ -121,20 +121,20 @@ class Router {
 
     private function routRegister(){
         if (isset($_POST["register-request"])) {
-            $username = $this->getParametre($_POST,"register_form_username");
-            $hashedPassword = sha1($this->getParametre($_POST,"register_form_password"));
-            $hashedPasswordConfirmation = sha1($this->getParametre($_POST,"register_form_password_confirmation"));
+            $username = $this->getParameter($_POST,"register_form_username");
+            $hashedPassword = sha1($this->getParameter($_POST,"register_form_password"));
+            $hashedPasswordConfirmation = sha1($this->getParameter($_POST,"register_form_password_confirmation"));
 
-            $email = $this->getParametre($_POST,"register_form_email");//On récupère également l'adresse mail pour effectuer une vérification sur la table customers
+            $email = $this->getParameter($_POST,"register_form_email");//On récupère également l'adresse mail pour effectuer une vérification sur la table customers
             if (strlen($username) < 1) {
                 $errorMessage = "Veuillez entrer un nom d'utilisateur";
                 $this->ctrlRegister->showRegisterPage($errorMessage);
             } 
-            else if (strlen($this->getParametre($_POST,"register_form_password")) < 1) {
+            else if (strlen($this->getParameter($_POST,"register_form_password")) < 1) {
                 $errorMessage = "Veuillez entrer un nom mot de passe";
                 $this->ctrlRegister->showRegisterPage($errorMessage);
             } 
-            else if (strlen($this->getParametre($_POST,"register_form_password_confirmation")) < 1) {
+            else if (strlen($this->getParameter($_POST,"register_form_password_confirmation")) < 1) {
                 $errorMessage = "Veuillez confirmer votre mot de passe";
                 $this->ctrlRegister->showRegisterPage($errorMessage);
             }
@@ -151,13 +151,13 @@ class Router {
                 $this->ctrlRegister->showRegisterPage($errorMessage);
             }
             else { //L'inscription est valide, on peut enregister l'utilisateur, en récupérant les informations personnelles
-                $firstname = $this->getParametre($_POST,"register_form_firstname");
-                $surname = $this->getParametre($_POST,"register_form_surname") ;
-                $add1 = $this->getParametre($_POST,"register_form_add1");
-                $add2 = $this->getParametre($_POST,"register_form_add2");
-                $city = $this->getParametre($_POST,"register_form_city");
-                $postcode = $this->getParametre($_POST,"register_form_postcode");
-                $phone = $this->getParametre($_POST,"register_form_phone");
+                $firstname = $this->getParameter($_POST,"register_form_firstname");
+                $surname = $this->getParameter($_POST,"register_form_surname") ;
+                $add1 = $this->getParameter($_POST,"register_form_add1");
+                $add2 = $this->getParameter($_POST,"register_form_add2");
+                $city = $this->getParameter($_POST,"register_form_city");
+                $postcode = $this->getParameter($_POST,"register_form_postcode");
+                $phone = $this->getParameter($_POST,"register_form_phone");
 
                 $this->ctrlRegister->ctrlRegisterUser($username, $hashedPassword, $firstname, 
                     $surname, $add1, $add2, $city, $postcode, $phone, $email);
@@ -183,7 +183,7 @@ class Router {
         $vue->generate(array('msgErreur' => $msgErreur));
     }
 
-    private function getParametre($tableau, $nom) { 
+    private function getParameter($tableau, $nom) { 
         if (isset($tableau[$nom])) { 
             return $tableau[$nom]; 
         } 
