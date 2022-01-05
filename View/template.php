@@ -25,7 +25,7 @@ if (!isset($_SESSION["logged"])) { //Si la variable de connexion n'est pas initi
         <div id="global">
         <nav class="navbar navbar-expand-lg fixed-top navbar-light">
           <div class="container">
-            <a class="navbar-left" href="?page=catalog"><img src="assets/img/shopify.png" class="nav-logo"></a>
+            <a class="navbar-left" href="?page=catalog"><img src="assets/img/shopify3.png" class="nav-logo"></a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
