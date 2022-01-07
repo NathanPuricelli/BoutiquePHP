@@ -87,8 +87,7 @@ a, a:hover, a:active, a:visited  {
     margin-right: auto;
     background: #fff;
     text-align: center;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
     color: #444444!important;
     transition: 0.2s;
 }
@@ -108,13 +107,12 @@ a, a:hover, a:active, a:visited  {
     margin: 10px;
     background: #fff;
     text-align: center;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
     transition: 0.2s;
 }
 
 .catalogBox:hover {
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
     transition: 0.2s;
 }
 
