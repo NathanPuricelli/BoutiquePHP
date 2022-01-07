@@ -5,6 +5,7 @@ require_once 'Controller/ControllerProduct.php';
 require_once 'Controller/ControllerCart.php';
 require_once 'Controller/ControllerLogin.php';
 require_once 'Controller/ControllerRegister.php';
+require_once 'Controller/ControllerAdminPannel.php';
 
 require_once 'View/View.php';
 class Router {
@@ -14,6 +15,7 @@ class Router {
     private $ctrlCart;
     private $ctrlLogin;
     private $ctrlRegister;
+    private $ctrlAdminPannel;
 
     public function __construct() {
         $this->ctrlCatalog = new ControllerCatalog();
@@ -21,6 +23,7 @@ class Router {
         $this->ctrlCart = new ControllerCart();
         $this->ctrlLogin = new ControllerLogin();
         $this->ctrlRegister = new ControllerRegister();
+        $this->ctrlAdminPannel = new ControllerAdminPannel();
     }
     
     public function rooting(){
@@ -56,6 +59,14 @@ class Router {
                     
                     case 'register':
                         $this->routRegister();
+                        break;
+                    
+                    case 'adminPannel':
+                        if ($_SESSION["logged_as_admin"]) {
+                            $this->ctrlAdminPannel->showPannel();
+                        } else {
+                            $this->ctrlCatalog->accueil(0);
+                        }
                         break;
                     
                     default:
@@ -105,12 +116,22 @@ class Router {
             
             $query = $this->ctrlLogin->ctrlGetUser($username, $hashedPassword);
             if ($query == null) {
-                $errorMessage = "Utilisateur non reconnu, veuillez vérifier les informations entrées";
-                $this->ctrlLogin->showLoginPage($errorMessage);
+                //Si l'utilisateur n'est pas reconnu comme client, on lance une requete sur la table admin avant d'afficher une erreur
+                $queryCheckAdmin = $this->ctrlLogin->ctrlGetAdmin($username, $hashedPassword);
+                if ($queryCheckAdmin != null) { //L'utilisateur est un admin
+                    $_SESSION["logged"] = true;
+                    $_SESSION["username"] = $username;
+                    $_SESSION["logged_as_admin"] = true;
+                    header('Location: index.php'); //Et on redirige l'utilisateur vers l'accueil
+                } else { //L'utilisateur n'est pas reconnu
+                    $errorMessage = "Utilisateur non reconnu, veuillez vérifier les informations entrées";
+                    $this->ctrlLogin->showLoginPage($errorMessage);
+                }
             } else { //La connexion a bien été faite ici
                 //$q = $query->fetch(); //On conserve dans $q la premiere ligne de la requete $query, c'est à dire la seule
                 $_SESSION["logged"] = true;
                 $_SESSION["username"] = $username;
+                $_SESSION["logged_as_admin"] = false;
                 header('Location: index.php'); //Et on redirige l'utilisateur vers l'accueil
             }
         } 

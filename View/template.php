@@ -46,9 +46,15 @@ if (!isset($_SESSION["logged"])) { //Si la variable de connexion n'est pas initi
                     echo '<li class="nav-item">
                             <a class="nav-link" href="?page=login">Déconnexion</a>
                           </li>';
-                    echo '<li class="nav-item"> 
-                            <a class="nav-link" href="?page=catalog">Profil : '. $_SESSION["username"] .'</a>
-                          </li>';
+                    if ($_SESSION["logged_as_admin"]) {
+                      echo '<li class="nav-item"> 
+                              <a class="nav-link" href="?page=adminPannel">Pannel admin : '. $_SESSION["username"] .'</a>
+                            </li>';
+                    } else {
+                      echo '<li class="nav-item"> 
+                              <a class="nav-link" href="?page=catalog">Profil : '. $_SESSION["username"] .'</a>
+                            </li>';
+                    }
                   } else {
                     echo '<li class="nav-item">
                             <a class="nav-link" href="?page=login">Connexion</a>
