@@ -52,6 +52,7 @@ class Router {
                         }
                         else {// Si l'utilisateur est connecté, on le déconnecte
                             $_SESSION["logged"] = false;
+                            $_SESSION["logged_as_admin"] = false;
                             $_SESSION["username"] = null;
                             header('Location: index.php');
                             break;

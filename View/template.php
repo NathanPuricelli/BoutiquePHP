@@ -4,6 +4,9 @@ if (!isset($_SESSION["logged"])) { //Si la variable de connexion n'est pas initi
   $_SESSION["logged"] = false;//On l'initialise à false
 }
 
+if (!isset($_SESSION["logged_as_admin"])) { //Si la variable de connexion n'est pas initialisée
+  $_SESSION["logged_as_admin"] = false;//On l'initialise à false
+}
 ?>
 
 
