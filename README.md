@@ -43,3 +43,6 @@ Controller :
         -Gérer bug sur la page inscription quand on efface ses données de navigation depuis celle ci
 
 
+On ajoute un item dans le panier : 
+    On créé une commande avec cet item et la quantité.
+    Si l'utilisateur n'est pas connecté, on créé une commande avec la variable de session id, puis on récupere l'id de la commande qu'on met dans $SESSION["SESS_ORDERNUM"]. On track apres avec cette session. Quand on se connecte on merge les 2 commandes en regardant session.
