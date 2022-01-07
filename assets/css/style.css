@@ -7,7 +7,7 @@
 @font-face { font-family: Helvetica; font-weight: bold; src: url('../fonts/Helvetica-Bold.ttf');}
 
 body {
-    background: rgb(255, 255, 255);
+    background: #f7f7fa;
     padding-top: 90px;
     font-family: "Inter", sans-serif;
     color: #444444;
@@ -24,7 +24,7 @@ a, a:hover, a:active, a:visited  {
 .navbar {
     background-color: rgb(248, 248, 248);
     height : 70px;
-    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
 }
 
 .nav-logo {
@@ -98,7 +98,7 @@ a, a:hover, a:active, a:visited  {
 }
 
 .categoryBox:hover {
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 8px 24px rgba(13, 13, 13, 0.4);
     transition: 0.2s;
 }
 
@@ -107,12 +107,12 @@ a, a:hover, a:active, a:visited  {
     margin: 10px;
     background: #fff;
     text-align: center;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 24px rgba(13, 13, 13, .04);
     transition: 0.2s;
 }
 
 .catalogBox:hover {
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 8px 24px rgba(13, 13, 13, 0.2);
     transition: 0.2s;
 }
 
@@ -183,9 +183,8 @@ a, a:hover, a:active, a:visited  {
     padding: 10px;
     width: 70%;
 
-    background: rgb(252, 252, 252);
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
+    background: #fff;
+    box-shadow: 0 0 24px rgba(13, 13, 13, .04);
 }
 
 .productBox .productImgSection {
@@ -240,8 +239,7 @@ a, a:hover, a:active, a:visited  {
     padding: 10px;
 
     background: #fff;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
+    box-shadow: 0 0 24px rgba(13, 13, 13, .04);
 }
 
 .reviewBox * {
@@ -279,9 +277,8 @@ a, a:hover, a:active, a:visited  {
     margin-right: auto;
     padding: 10px;
 
-    background: rgb(252, 252, 252);
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
+    background: #fff;
+    box-shadow: 0 0 24px rgba(13, 13, 13, .04);
 }
 
 .formAddReview {
