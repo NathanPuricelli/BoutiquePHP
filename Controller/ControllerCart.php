@@ -11,10 +11,7 @@ class ControllerCart {
         $this->cart = new Cart();
     }
 
-    public function ctrlGetOrderIdFromUsername($username)
-    {
-        return $this->cart->getOrderId($username);
-    }
+
 
     public function ctrlGetOrderStatus($order_id)
     {
@@ -29,11 +26,6 @@ class ControllerCart {
     public function ctrlGetCustomerIdFromUsername($username)
     {
         return $this->cart->getCustomerId($username);
-    }
-
-    public function ctrlGetOrderIdFromSession($session)
-    {
-        return $this->cart->getOrderIdFromSession($session);
     }
 
     public function ctrlCreateOrder($customer_id, $session, $registered)

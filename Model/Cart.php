@@ -58,17 +58,6 @@ class Cart extends Model {
 
     }
 
-    public function getOrderIdFromSession($session)
-    {
-        $sql = "select id from orders WHERE session = ? and registered = 0";
-        $id = $this->executerRequete($sql, array($session));
-        if ($id->rowCount() > 0) {
-            return $id->fetch();
-        }
-        else {
-            return null;
-        }
-    }
     
     public function getCartContent($order_id)
     {
