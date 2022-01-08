@@ -16,6 +16,26 @@ class ControllerCart {
         return $this->cart->getOrderId($username);
     }
 
+    public function ctrlGetOrderStatus($order_id)
+    {
+        return $this->cart->getOrderStatus($order_id);
+    }
+
+    public function ctrlGetOrderId($username = null, $session = null)
+    {
+        return $this->cart->getOrderId($username, $session);
+    }
+
+    public function ctrlGetCustomerIdFromUsername($username)
+    {
+        return $this->cart->getCustomerId($username);
+    }
+
+    public function ctrlGetOrderIdFromSession($session)
+    {
+        return $this->cart->getOrderIdFromSession($session);
+    }
+
     public function ctrlCreateOrder($customer_id, $session, $registered)
     {
         return $this->cart->createOrder($customer_id, $session, $registered);

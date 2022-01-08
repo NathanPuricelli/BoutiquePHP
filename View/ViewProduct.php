@@ -39,6 +39,10 @@
                 <?php else: ?>
                     <h5 class="unavailableProductText">Article en rupture de stock</h5>
                 <?php endif; ?>
+                <form action = "index.php?page=Cart" method="POST"> 
+                    <?=  "<input type='hidden' id='idProduct' name='idProduct' value=".$product['id'].">" ?>
+                    <input type="submit" name = "addedToCart" value="Ajouter au panier">
+                </form>
         </div>
     </div>
 

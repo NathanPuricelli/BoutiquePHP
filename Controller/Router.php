@@ -54,7 +54,7 @@ class Router {
                             $_SESSION["logged"] = false;
                             $_SESSION["logged_as_admin"] = false;
                             $_SESSION["username"] = null;
-                            $_SESSION["SESS_ORDERNUM"] = null;
+                            $this->setSessionOrder();
                             header('Location: index.php');
                             break;
                         }
@@ -69,6 +69,10 @@ class Router {
                         } else {
                             $this->ctrlCatalog->accueil(0);
                         }
+                        break;
+                    
+                    case 'Cart':
+                        $this->routCart();
                         break;
                     
                     default:
@@ -123,7 +127,7 @@ class Router {
                 if ($queryCheckAdmin != null) { //L'utilisateur est un admin
                     $_SESSION["logged"] = true;
                     $_SESSION["username"] = $username;
-                    $_SESSION["SESS_ORDERNUM"] = $this->ctrlCart->ctrlGetOrderIdFromUsername($username);
+                    $this->setSessionOrder($username);
                     $_SESSION["logged_as_admin"] = true;
                     header('Location: index.php'); //Et on redirige l'utilisateur vers l'accueil
                 } else { //L'utilisateur n'est pas reconnu
@@ -134,7 +138,7 @@ class Router {
                 //$q = $query->fetch(); //On conserve dans $q la premiere ligne de la requete $query, c'est à dire la seule
                 $_SESSION["logged"] = true;
                 $_SESSION["username"] = $username;
-                $_SESSION["SESS_ORDERNUM"] = $this->ctrlCart->ctrlGetOrderIdFromUsername($username);
+                $this->setSessionOrder($username);
                 $_SESSION["logged_as_admin"] = false;
                 header('Location: index.php'); //Et on redirige l'utilisateur vers l'accueil
             }
@@ -188,7 +192,7 @@ class Router {
                     $surname, $add1, $add2, $city, $postcode, $phone, $email);
                 $_SESSION["logged"] = true; //Une fois enregistré on connecte l'utilisateur
                 $_SESSION["username"] = $username;
-                $_SESSION["SESS_ORDERNUM"] = $this->ctrlCart->ctrlGetOrderIdFromUsername($username);
+                $this->setSessionOrder($username);
 
                 
                 header('Location: index.php');
@@ -201,12 +205,57 @@ class Router {
 
     }
 
+    private function routCart()
+    {
+        if (isset($_POST['addedToCart']))
+        {
+            if ($_SESSION["SESS_ORDERNUM"] == null)
+            {
+                if($_SESSION['logged'] == true){
+                    $result = $this->ctrlCart->ctrlGetCustomerIdFromUsername($_SESSION["username"]);
+                    $this->ctrlCart->ctrlCreateOrder($result['customer_id'], session_id(), 1);
+                    $this->setSessionOrder($_SESSION["username"]);
+                }
+                else 
+                {
+                    $this->ctrlCart->ctrlCreateOrder(0, session_id(), 0);
+                    $this->setSessionOrder($_SESSION["username"]);
+                }
+
+            }
+
+            $this->ctrlCart->ctrlAddItemToOder($_SESSION["SESS_ORDERNUM"], $_POST['idProduct'], 1);
+        }
+
+        if ($_SESSION["SESS_ORDERNUM"] != null) // si la session / l'utilisateur a déja un panier on l'affiche
+        {
+            $this->ctrlCart->showCart($_SESSION["SESS_ORDERNUM"]);
+        }
+        else $this->erreur("Ajoutez des produits au panier avant de le consulter.");
+
+    }
+
     
 
     // Affiche une erreur
     private function erreur($msgErreur) {
         $vue = new View("Error");
         $vue->generate(array('msgErreur' => $msgErreur));
+    }
+
+    private function setSessionOrder($username = null)
+    {
+        $orderNum = $this->ctrlCart->ctrlGetOrderId($username, session_id());
+        if ($orderNum == null)
+        {
+            $_SESSION["SESS_ORDERNUM"] =  $orderNum;
+            $_SESSION["SESS_ORDERSTATUS"] = null;
+        }
+        else
+        {
+            $_SESSION["SESS_ORDERNUM"] = $orderNum["id"];
+            $_SESSION["SESS_ORDERSTATUS"] = $this->ctrlCart->ctrlGetOrderStatus(intval($orderNum["id"]));
+        }
     }
 
     private function getParameter($tableau, $nom) { 

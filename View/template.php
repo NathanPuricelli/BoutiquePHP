@@ -42,7 +42,7 @@ if (!isset($_SESSION["logged_as_admin"])) { //Si la variable de connexion n'est 
                   <a class="nav-link active" href="?page=catalog">Catalogue</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Panier</a>
+                  <a class="nav-link" href="?page=Cart">Panier</a>
                 </li>
                 <?php
                   if ($_SESSION["logged"]) {
