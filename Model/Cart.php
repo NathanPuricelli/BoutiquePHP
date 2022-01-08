@@ -2,10 +2,13 @@
 require_once 'Model.php';
 class Cart extends Model {
 
-    public function getOrderId($customer_id)
+    public function getOrderId($username)
     {
-        $sql = "select id from orders where customer_id = ? and status != 10 ";
-        $id = $this->executerRequete($sql, array($customer_id));
+        $sql = "select O.id 
+                from orders O join logins l ON o.customer_id = l.customer_id 
+                where l.username = ?
+                and O.status != 10 ";
+        $id = $this->executerRequete($sql, array($username));
         if ($id->rowCount() > 0) {
             return $id->fetch();
         }

@@ -26,7 +26,7 @@ class Router {
         $this->ctrlAdminPannel = new ControllerAdminPannel();
     }
     
-    public function rooting(){
+    public function routing(){
         try {
             if (isset($_GET['page'])) {
                 switch ($_GET['page'])
@@ -54,6 +54,7 @@ class Router {
                             $_SESSION["logged"] = false;
                             $_SESSION["logged_as_admin"] = false;
                             $_SESSION["username"] = null;
+                            $_SESSION["SESS_ORDERNUM"] = null;
                             header('Location: index.php');
                             break;
                         }
@@ -122,6 +123,7 @@ class Router {
                 if ($queryCheckAdmin != null) { //L'utilisateur est un admin
                     $_SESSION["logged"] = true;
                     $_SESSION["username"] = $username;
+                    $_SESSION["SESS_ORDERNUM"] = $this->ctrlCart->ctrlGetOrderIdFromUsername($username);
                     $_SESSION["logged_as_admin"] = true;
                     header('Location: index.php'); //Et on redirige l'utilisateur vers l'accueil
                 } else { //L'utilisateur n'est pas reconnu
@@ -132,6 +134,7 @@ class Router {
                 //$q = $query->fetch(); //On conserve dans $q la premiere ligne de la requete $query, c'est à dire la seule
                 $_SESSION["logged"] = true;
                 $_SESSION["username"] = $username;
+                $_SESSION["SESS_ORDERNUM"] = $this->ctrlCart->ctrlGetOrderIdFromUsername($username);
                 $_SESSION["logged_as_admin"] = false;
                 header('Location: index.php'); //Et on redirige l'utilisateur vers l'accueil
             }
@@ -185,6 +188,7 @@ class Router {
                     $surname, $add1, $add2, $city, $postcode, $phone, $email);
                 $_SESSION["logged"] = true; //Une fois enregistré on connecte l'utilisateur
                 $_SESSION["username"] = $username;
+                $_SESSION["SESS_ORDERNUM"] = $this->ctrlCart->ctrlGetOrderIdFromUsername($username);
 
                 
                 header('Location: index.php');
