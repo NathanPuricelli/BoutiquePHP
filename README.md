@@ -26,7 +26,6 @@ Controller :
             Pour les non connectés avec les variables de session
             Pour les connectés.
         -Page admin pour check tout (vérifier que l'admin est connecté)
-        -CSS de addReview
         -Recherche dans catalogue
         -connexion : 
             -Page connexion  :
@@ -34,6 +33,7 @@ Controller :
                 - inscription on renseigne une delivery adress
             A la connexion, on donne un id à l'utilisateur via $SESSION["id"]
             si l'utilisateur ajoute au panier, on créé une commande avec custommer_id = $SESSION["id"]
+        -Passer des infos de JS à Php pour ajouter plusieurs au panier (si possible)
 
     Idée :
         -Sur template.php, afficher un onglet 'Profil' même quand l'utilisateur n'est pas un admin ?

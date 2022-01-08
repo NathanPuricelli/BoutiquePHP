@@ -11,30 +11,54 @@
     </div>
     <div class="container">
 
-        <?php foreach ($orders as $order):?>
+        <?php foreach ($ordersList as $order):?>
         <div class="row orderBox">
             <div class="col">
                 <div class="row text-center">
-                    <p>Customer ID : <?= $order['customer_id'] ?></p>
+                    <p>Date : <?= $order['date'] ?></p>
                 </div>
                 <div class="row text-center">
-                    <p>Register : <?= $order['registered'] ?></p>
+                    <p>Type de paiement : <?= $order['payment_type'] ?></p>
                 </div>
                 <div class="row text-center">
-                    <p>delivery_add_id : <?= $order['delivery_add_id'] ?></p>
+                    <p>Total : <?= $order['total'] ?> €</p>
+                </div>
+                <br/>
+
+                <h3 class="text-center">Infos client</h3>
+                <div class="row text-center">
+                    <p>Prénom : <?= $order['customer']['forname'] ?></p>
                 </div>
                 <div class="row text-center">
-                    <p>payment_type : <?= $order['payment_type'] ?></p>
+                    <p>Nom : <?= $order['customer']['surname'] ?></p>
+                </div>
+
+                <h3 class="text-center">Adresse</h3>
+                <div class="row text-center">
+                    <p>Adresse : <?= $order['address']['add1'] ?></p>
                 </div>
                 <div class="row text-center">
-                    <p>date : <?= $order['date'] ?></p>
+                    <p>Ville : <?= $order['address']['city'] ?></p>
                 </div>
                 <div class="row text-center">
-                    <p>status : <?= $order['status'] ?></p>
+                    <p>Code postal : <?= $order['address']['postcode'] ?></p>
                 </div>
+                
+                <h3 class="text-center">=================</h3>
+                <h3 class="text-center">Produits commandés</h3>
+                <?php foreach ($order['itemList'] as $item):?>
+                <p class="text-center">- <?= $item['name'] ?> (x<?= $item['quantity'] ?>) | <?= $item['price']*$item['quantity'] ?></p>
+                <?php endforeach; ?>
+                <h3 class="text-center">=================</h3>
                 <div class="row text-center">
-                    <h5>total : <?= $order['total'] ?></h5>
+                    <p>Etat de la commande (status) : <?= $order['status'] ?></p>
                 </div>
+
+                <form action = "index.php?page=adminPannel" method="POST" class="text-center">
+                    <?=  "<input type='hidden' id='idOrder' name='idOrder' value=".$order['id'].">" ?>
+                    <input type="submit" name = "changeStatus" value="Confirmer la commande">
+                </form>
+
             </div>
         </div>
         <?php endforeach; ?>
