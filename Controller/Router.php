@@ -72,6 +72,10 @@ class Router {
                         break;
                     
                     case 'Cart':
+                        if (!$_SESSION["logged"]) { //Si l'utilisateur n'est pas connecté : affichage de la page connexion
+                            $this->setSessionOrder();
+                        }
+                        
                         $this->routCart();
                         break;
                     
@@ -219,7 +223,7 @@ class Router {
                 else 
                 {
                     $this->ctrlCart->ctrlCreateOrder(0, session_id(), 0);
-                    $this->setSessionOrder($_SESSION["username"]);
+                    $this->setSessionOrder();
                 }
 
             }
@@ -254,7 +258,7 @@ class Router {
         else
         {
             $_SESSION["SESS_ORDERNUM"] = $orderNum["id"];
-            $_SESSION["SESS_ORDERSTATUS"] = $this->ctrlCart->ctrlGetOrderStatus(intval($orderNum["id"]));
+            $_SESSION["SESS_ORDERSTATUS"] = $this->ctrlCart->ctrlGetOrderStatus(intval($orderNum["id"]))["status"];
         }
     }
 

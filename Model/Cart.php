@@ -69,7 +69,7 @@ class Cart extends Model {
             return $product;
         }
         else
-            return;
+            return array();
     }
 
 
@@ -116,7 +116,7 @@ class Cart extends Model {
                     WHERE  id IN (
                                    SELECT MAX(id)
                                    FROM   orderitems
-                                    WHERE order_id = 67 and product_id = 30
+                                    WHERE order_id = ? and product_id = ?
                                    GROUP BY order_id, product_id, quantity
                                    HAVING COUNT(*) > 1
                                   )";
