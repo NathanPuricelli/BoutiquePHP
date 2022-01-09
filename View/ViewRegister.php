@@ -73,7 +73,9 @@
                     <input type="text" class="form-control" name="register_form_email" placeholder="nom@exemple.com" required>
                 </div>
             </div>
-            <button class="btn1" type="submit" name='register-request'>S'inscrire</button>
+            <div class="buttonHolder">
+                <button class="btn1" type="submit" name='register-request'>S'inscrire</button>
+            </div>
         </form>
     </div>
 </div>

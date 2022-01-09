@@ -122,7 +122,9 @@
             <textarea name='review_form_description' id='review_form_description' rows='4' cols='50' required style="resize: none;"></textarea>
 
             <br/>
-            <button class="btn1" type="submit" name='confirm-review'>Poster</button>
+            <div class="buttonHolder">
+                <button class="btn1" type="submit" name='confirm-review'>Ajouter un commentaire</button>
+            </div>
             </form>
         </div>
     </div>

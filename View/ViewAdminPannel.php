@@ -6,63 +6,115 @@
 <!-- PARTIE COMMANDES -->
 
 <div class="container">
-    <div class="text-center">
-        <h2>Liste des commandes passées</h2>
-    </div>
     <div class="container">
-
-        <?php foreach ($ordersList as $order):?>
-        <div class="row orderBox">
-            <div class="col">
-                <div class="row text-center">
-                    <p>Date : <?= $order['date'] ?></p>
+        <div class="row">
+            <!-- AFFICHAGE DU PANNEL INFO -->
+            <div class="col pannelInfosSection">
+                <div class="text-center">
+                    <h3>Pannel administrateur</h3>
                 </div>
-                <div class="row text-center">
-                    <p>Type de paiement : <?= $order['payment_type'] ?></p>
-                </div>
-                <div class="row text-center">
-                    <p>Total : <?= $order['total'] ?> €</p>
-                </div>
+                <h5>Infos :</h5>
                 <br/>
-
-                <h3 class="text-center">Infos client</h3>
-                <div class="row text-center">
-                    <p>Prénom : <?= $order['customer']['forname'] ?></p>
-                </div>
-                <div class="row text-center">
-                    <p>Nom : <?= $order['customer']['surname'] ?></p>
-                </div>
-
-                <h3 class="text-center">Adresse</h3>
-                <div class="row text-center">
-                    <p>Adresse : <?= $order['address']['add1'] ?></p>
-                </div>
-                <div class="row text-center">
-                    <p>Ville : <?= $order['address']['city'] ?></p>
-                </div>
-                <div class="row text-center">
-                    <p>Code postal : <?= $order['address']['postcode'] ?></p>
-                </div>
-                
-                <h3 class="text-center">=================</h3>
-                <h3 class="text-center">Produits commandés</h3>
-                <?php foreach ($order['itemList'] as $item):?>
-                <p class="text-center">- <?= $item['name'] ?> (x<?= $item['quantity'] ?>) | <?= $item['price']*$item['quantity'] ?></p>
-                <?php endforeach; ?>
-                <h3 class="text-center">=================</h3>
-                <div class="row text-center">
-                    <p>Etat de la commande (status) : <?= $order['status'] ?></p>
-                </div>
-
-                <form action = "index.php?page=adminPannel" method="POST" class="text-center">
-                    <?=  "<input type='hidden' id='idOrder' name='idOrder' value=".$order['id'].">" ?>
-                    <input type="submit" name = "changeStatus" value="Confirmer la commande">
+                <p>Connecté en tant que <?= $_SESSION['username'] ?> </p>
+                <br/>
+                <p>
+                    - <?= count($ordersList) ?> commandes sont en cours
+                </p>
+            </div>
+            <!-- AFFICHAGE DU FORMULAIRE D'INSCRIPTION -->
+            <div class="col addAdminSection">
+                <form action="index.php?page=adminPannel" method='post'>
+                    <div class="text-center">
+                        <h3>Ajouter un compte administrateur</h3>
+                    </div>
+                    <?php 
+                    if ($registerValidationMessage != "") {
+                        echo "<strong>".$registerValidationMessage."</strong>";
+                    } 
+                    ?>
+                    <div class="form-group">
+                        <label for="inputUsername_register">Nom de l'admin</label>
+                        <input type="text" class="form-control" name="register_form_username_admin" placeholder="Nom de l'admin" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword_register">Mot de passe</label>
+                        <input type="password" class="form-control" name="register_form_password_admin" placeholder="Mot de passe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPasswordConfirmation_register">Confirmer le mot de passe</label>
+                        <input type="password" class="form-control" name="register_form_password_confirmation_admin" placeholder="Confirmation" required>
+                    </div>
+                    <div class="buttonHolder">
+                        <button class="btn1" type="submit" name='register-request'>Ajouter l'utilisateur</button>
+                    </div>
                 </form>
+            </div>
+        </div>
+        <div class="text-center">
+            <h2>Liste des commandes passées</h2>
+        </div>
 
+        <!-- AFFICHAGE DES COMMANDES -->
+        <?php foreach ($ordersList as $order):?>
+        <?php if($order['status'] == 10):?>
+        <div class="orderBox confirmed">
+        <?php else:?>
+        <div class="orderBox">
+        <?php endif;?>
+            <div class="row" style="text-align:center;">
+                <div class="col-5">
+                    <h5>Commande #<?= $order['id'] ?></h5>
+                    <p><?= $order['date'] ?></p>
+                    <p><?= $order['total'] ?> € (Par <?= $order['payment_type'] ?>)</p>
+                </div>
+                <div class="col-3">
+                    <p>Client : <?= $order['customer']['forname']." ".$order['customer']['surname'] ?></p>
+                </div>
+                <div class="col-4">
+                    <p>Adresse : <?= $order['address']['add1'] ?></p>
+                    <p><?= $order['address']['city'] ?></p>
+                    <p><?= $order['address']['postcode'] ?></p>
+                </div>
+            </div>
+            <div class="row">
+                <h5>Détails commande :</h5>
+            </div>
+            <div class="row">
+                <?php foreach ($order['itemList'] as $item):?>
+                <div class="smallProductBox">
+                    <?= "<img src = \"assets/img/". $item['image'] ."\" class ='smallItemImage'>" ?>
+                    <p>x<?= $item['quantity'] ?></p>
+                    <p><?= $item['price']*$item['quantity'] ?> €</p>
+                </div>
+                <?php endforeach; ?>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php
+                    switch ($order['status']) {
+                        case 1:
+                            $txtStatus = "Adresse entrée";
+                            break;
+                        case 2:
+                            $txtStatus = "Commande payée";
+                            break;
+                        case 10:
+                            $txtStatus = "Commande confirmée et envoyée";
+                            break;
+                    }
+                    ?>
+                    <h5>Etat de la commande : <?= $txtStatus ?></h5>
+                </div>
+                <?php if($order['status'] != 10):?>
+                <div class="col">
+                    <form action = "index.php?page=adminPannel" method="POST" class="text-center">
+                        <?=  "<input type='hidden' id='idOrder' name='idOrder' value=".$order['id'].">" ?>
+                        <button class="btn1" type="submit" name='confirmOrder'>Confirmer la commander</button>
+                    </form>
+                </div>
+                <?php endif;?>
             </div>
         </div>
         <?php endforeach; ?>
-
     </div>
-
 </div>

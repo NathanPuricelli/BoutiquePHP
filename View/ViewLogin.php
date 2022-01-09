@@ -19,7 +19,9 @@
                 <label for="inputPassword">Mot de passe</label>
                 <input type="password" class="form-control" name="login_form_password" placeholder="Votre mot de passe">
             </div>
-            <button class="btn1" type="submit" name='login-request' style="margin-left:auto;margin-right:auto;">Se connecter</button>
+            <div class="buttonHolder">
+                <button class="btn1" type="submit" name='login-request' style="margin-left:auto;margin-right:auto;">Se connecter</button>
+            </div>
         </form>
     </div>
 </div>

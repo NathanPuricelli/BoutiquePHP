@@ -65,7 +65,7 @@ class Router {
                     
                     case 'adminPannel':
                         if ($_SESSION["logged_as_admin"]) {
-                            $this->ctrlAdminPannel->showPannel();
+                            $this->routAdminPannel();
                         } else {
                             $this->ctrlCatalog->accueil(0);
                         }
@@ -239,7 +239,36 @@ class Router {
 
     }
 
-    
+    private function routAdminPannel() {
+        if (isset($_POST['register-request'])) {
+            $username = $this->getParameter($_POST,"register_form_username_admin");
+            $hashedPassword = sha1($this->getParameter($_POST,"register_form_password_admin"));
+            $hashedPasswordConfirmation = sha1($this->getParameter($_POST,"register_form_password_confirmation_admin"));
+            if ($hashedPasswordConfirmation != $hashedPassword) {
+                $registerValidationMessage = "Le mot de passe n'a pas été correctement confirmé";
+                $this->ctrlAdminPannel->showPannel($registerValidationMessage);
+            }
+            else if ($this->ctrlRegister->ctrlUserAlreadyExists($username)) {
+                $registerValidationMessage = "Ce nom d'utilisateur existe déjà";
+                $this->ctrlAdminPannel->showPannel($registerValidationMessage);
+            }
+            else {
+                $this->ctrlAdminPannel->ctrlRegisterAdmin($username, $hashedPassword);
+                $registerValidationMessage = "Inscription validée. ".$username." est désormais un administrateur.";
+                $this->ctrlAdminPannel->showPannel($registerValidationMessage);
+            }
+        } 
+        else if (isset($_POST['confirmOrder'])) {
+            $orderId = $this->getParameter($_POST,"idOrder");
+            $this->ctrlAdminPannel->ctrlConfirmOrder($orderId);
+            $this->ctrlAdminPannel->showPannel();
+        } 
+        else {
+            $this->ctrlAdminPannel->showPannel();
+        }
+
+    }
+
 
     // Affiche une erreur
     private function erreur($msgErreur) {

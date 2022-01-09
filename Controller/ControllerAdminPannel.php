@@ -11,11 +11,13 @@ class ControllerAdminPannel {
         $this->adminPannel = new AdminPannel();
     }
 
-    // Afficher la liste des commandes en cours
-    /*public function ctrlAddReview($id_product, $name, $photoUser, $stars, $title, $description)
-    {
-        $this->product->addReview($id_product, $name, $photoUser, $stars, $title, $description);
-    }*/
+    public function ctrlRegisterAdmin($username, $hashedPassword) {
+        $this->adminPannel->registerAdmin($username, $hashedPassword);
+    }
+
+    public function ctrlConfirmOrder($id) {
+        $this->adminPannel->confirmOrder($id);
+    }
 
     public function getOrders() {
         $ordersTable = $this->adminPannel->getOrders();
@@ -26,21 +28,17 @@ class ControllerAdminPannel {
             paymentType
             status
             total
-
             deliveryAdd {
                 add1
                 city
                 postCode
             }
-
             customer {
                 name
                 surname
             }
-
             itemsList {
                 *contient plusieurs instances de item*
-
                 item {
                     quantity
                     name
@@ -51,71 +49,73 @@ class ControllerAdminPannel {
         }
         */
         foreach ($ordersTable as $order) {
-            $date = $order['date'];
-            $payment_type = $order['payment_type'];
             $status = $order['status'];
-            $total = $order['total'];
+            if ($status != 0) {
+                $date = $order['date'];
+                $payment_type = $order['payment_type'];
+                $total = $order['total'];
 
-            //Gestion du customer
-            $customer_id = $order['customer_id'];
-            $customerTable = $this->adminPannel->getCustomer($customer_id);
-            $customer = array(
-                "forname" => $customerTable["forname"],
-                "surname" => $customerTable["surname"],
-            );
-
-            //Gestion de l'addresse
-            $delivery_add_id = $order['delivery_add_id'];
-            $addressTable = $this->adminPannel->getAddress($delivery_add_id);
-            $address = array(
-                "add1" => $addressTable["add1"],
-                "city" => $addressTable["city"],
-                "postcode" => $addressTable["postcode"],
-            );
-
-            //Gestion de la liste de produits
-            $orderId = $order['id'];
-            $itemTable = $this->adminPannel->getOrderItems($orderId);
-            $itemList = array(); //Liste dans laquelle seront rangés chaque items, eux même des listes d'informations sur l'item en question
-            foreach ($itemTable as $orderItemLine) {
-                $quantity = $orderItemLine['quantity'];
-
-                $itemId =  $orderItemLine['product_id'];
-                $itemInfos = $this->adminPannel->getItemInfos($itemId);
-                $name = $itemInfos["name"];
-                $image = $itemInfos["image"];
-                $price = $itemInfos["price"];
-
-                $item = array(
-                    "quantity" => $quantity,
-                    "name" => $name,
-                    "image" => $image,
-                    "price" => $price
+                //Gestion du customer
+                $customer_id = $order['customer_id'];
+                $customerTable = $this->adminPannel->getCustomer($customer_id);
+                $customer = array(
+                    "forname" => $customerTable["forname"],
+                    "surname" => $customerTable["surname"],
                 );
-                array_push($itemList, $item);
+
+                //Gestion de l'addresse
+                $delivery_add_id = $order['delivery_add_id'];
+                $addressTable = $this->adminPannel->getAddress($delivery_add_id);
+                $address = array(
+                    "add1" => $addressTable["add1"],
+                    "city" => $addressTable["city"],
+                    "postcode" => $addressTable["postcode"],
+                );
+
+                //Gestion de la liste de produits
+                $orderId = $order['id'];
+                $itemTable = $this->adminPannel->getOrderItems($orderId);
+                $itemList = array(); //Liste dans laquelle seront rangés chaque items, eux même des listes d'informations sur l'item en question
+                foreach ($itemTable as $orderItemLine) {
+                    $quantity = $orderItemLine['quantity'];
+
+                    $itemId =  $orderItemLine['product_id'];
+                    $itemInfos = $this->adminPannel->getItemInfos($itemId);
+                    $name = $itemInfos["name"];
+                    $image = $itemInfos["image"];
+                    $price = $itemInfos["price"];
+
+                    $item = array(
+                        "quantity" => $quantity,
+                        "name" => $name,
+                        "image" => $image,
+                        "price" => $price
+                    );
+                    array_push($itemList, $item);
+                }
+
+                //Ajout de toutes ces infos à l'array de la commande orderInfos
+                $orderInfos = array(
+                    "id" => $orderId,
+                    "date" => $date,
+                    "payment_type" => $payment_type,
+                    "status" => $status,
+                    "total" => $total,
+                    "customer" => $customer,
+                    "address" => $address,
+                    "itemList" => $itemList
+                );
+
+                array_push($ordersList, $orderInfos);
             }
-
-            //Ajout de toutes ces infos à l'array de la commande orderInfos
-            $orderInfos = array(
-                "id" => $orderId,
-                "date" => $date,
-                "payment_type" => $payment_type,
-                "status" => $status,
-                "total" => $total,
-                "customer" => $customer,
-                "address" => $address,
-                "itemList" => $itemList
-            );
-
-            array_push($ordersList, $orderInfos);
         }
         return $ordersList;
     }
 
-    public function showPannel() {
+    public function showPannel($registerValidationMessage = "") {
         $ordersList = $this->getOrders();
         $view = new View("AdminPannel");
-        $view->generate(array('ordersList' => $ordersList));
+        $view->generate(array('ordersList' => $ordersList, 'registerValidationMessage' => $registerValidationMessage));
     }
 
 

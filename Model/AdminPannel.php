@@ -1,6 +1,17 @@
 <?php
 require_once 'Model.php';
 class AdminPannel extends Model {
+    public function registerAdmin($username, $hashedPassword) {
+        $sql = "INSERT INTO admin (id, username, password)
+                    VALUES (NULL, ?, ?);";
+        try{
+            $this->executerRequete($sql, array($username, $hashedPassword));
+        }
+        catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
     public function getOrders() {
         $sql = "SELECT * FROM orders";
         $orders = $this->executerRequete($sql);
@@ -32,5 +43,15 @@ class AdminPannel extends Model {
         $query = $this->executerRequete($sql, array($id));
         $q = $query->fetch();
         return $q; //On renvoie uniquement la ligne de l'adresse, et pas toute la table obtenue dans $query
+    }
+
+    public function confirmOrder($id) {
+        $sql = "UPDATE orders SET status = 10 WHERE id = ?";
+        try {
+            $this->executerRequete($sql, array($id));
+        }
+        catch (Exception $e) {
+            return $e->getMessage();
+        }
     }
 };
