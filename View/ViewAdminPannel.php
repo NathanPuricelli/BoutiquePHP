@@ -105,7 +105,7 @@
                     ?>
                     <h5>Etat de la commande : <?= $txtStatus ?></h5>
                 </div>
-                <?php if($order['status'] != 10):?>
+                <?php if($order['status'] == 2):?>
                 <div class="col">
                     <form action = "index.php?page=adminPannel" method="POST" class="text-center">
                         <?=  "<input type='hidden' id='idOrder' name='idOrder' value=".$order['id'].">" ?>
