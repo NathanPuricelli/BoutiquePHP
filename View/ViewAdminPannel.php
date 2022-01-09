@@ -64,16 +64,16 @@
             <div class="row" style="text-align:center;">
                 <div class="col-5">
                     <h5>Commande #<?= $order['id'] ?></h5>
-                    <p><?= $order['date'] ?></p>
-                    <p><?= $order['total'] ?> € (Par <?= $order['payment_type'] ?>)</p>
+                    <p><?= $order['date'] ?><br/>
+                    <?= $order['total'] ?> € (Par <?= $order['payment_type'] ?>)</p>
                 </div>
                 <div class="col-3">
                     <p>Client : <?= $order['customer']['forname']." ".$order['customer']['surname'] ?></p>
                 </div>
                 <div class="col-4">
-                    <p>Adresse : <?= $order['address']['add1'] ?></p>
-                    <p><?= $order['address']['city'] ?></p>
-                    <p><?= $order['address']['postcode'] ?></p>
+                    <p>Adresse : <?= $order['address']['add1'] ?> <br/>
+                    <?= $order['address']['city'] ?> <br/>
+                    <?= $order['address']['postcode'] ?></p>
                 </div>
             </div>
             <div class="row">
@@ -83,8 +83,8 @@
                 <?php foreach ($order['itemList'] as $item):?>
                 <div class="smallProductBox">
                     <?= "<img src = \"assets/img/". $item['image'] ."\" class ='smallItemImage'>" ?>
-                    <p>x<?= $item['quantity'] ?></p>
-                    <p><?= $item['price']*$item['quantity'] ?> €</p>
+                    <p>x<?= $item['quantity'] ?><br/>
+                    <?= $item['price']*$item['quantity'] ?> €</p>
                 </div>
                 <?php endforeach; ?>
             </div>
