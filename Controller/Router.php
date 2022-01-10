@@ -216,7 +216,6 @@ class Router {
 
     private function routCart()
     {
-        echo $_POST['hiddenQuantity'];
         if (isset($_POST['addedToCart']))
         {
             if ($_SESSION["SESS_ORDERNUM"] == null)
@@ -234,7 +233,7 @@ class Router {
 
             }
 
-            $this->ctrlCart->ctrlAddItemToOder($_SESSION["SESS_ORDERNUM"], $_POST['idProduct'], 1);
+            $this->ctrlCart->ctrlAddItemToOder($_SESSION["SESS_ORDERNUM"], $_POST['idProduct'], 1); //Remplacer 1 par $_POST['hiddenQuantity']
         }
 
         if ($_SESSION["SESS_ORDERNUM"] != null) // si la session / l'utilisateur a déja un panier on l'affiche

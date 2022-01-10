@@ -302,6 +302,14 @@ a, a:hover, a:active, a:visited  {
     text-align: center;
 }
 
+/* PANIER */
+.productInCart {
+    background-color: #fff;
+    box-shadow: 0 0 24px rgba(13, 13, 13, .04);
+    padding: 10px;
+    margin:20px;
+}
+
 /* PANNEL ADMINISTRATEUR */
 .pannelInfosSection {
     background-color: #fff;
