@@ -71,9 +71,9 @@ if (!isset($_SESSION["logged_as_admin"])) { //Si la variable de connexion n'est 
               </ul>
 
               <div class="search-bar">
-                <form class="d-flex">
-                  <input class="search-zone" type="chercher" placeholder="" aria-label="Chercher">
-                  <button class="btn0" type="submit">Chercher</button>
+                <form action = "index.php?page=catalog" method="POST" class="d-flex">
+                  <input class="search-zone" type="chercher" placeholder="" aria-label="Chercher" name="searchTextZone" required>
+                  <button class="btn0" type="submit" name="searchItemsRequest">Chercher</button>
                 </form>
               </div>
             </div>

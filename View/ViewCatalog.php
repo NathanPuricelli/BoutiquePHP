@@ -29,8 +29,18 @@
         
     <?php endforeach; ?>
 
-    <!--<p><?= $category_name['name'] ?></p>-->
-
+    <?php if($txtSearched != null):?>
+        <br/>
+        <?php if($products->rowCount() == 0):?>
+        <div class="text-center">
+            <h2>Aucun arcticle ne correspond à votre recherche ' <i><?= $txtSearched ?></i> '</h2>
+        </div>
+        <?php else:?>
+        <div class="text-center">
+            <h2>Voici les articles correspondant à ' <i><?= $txtSearched ?></i> '</h2>
+        </div>
+        <?php endif;?>
+    <?php endif;?>
 
     <div class="row">
 

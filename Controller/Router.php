@@ -98,11 +98,16 @@ class Router {
     }
 
     private function routCatalog(){
-        if (isset($_GET['cat'])) {
-            $this->ctrlCatalog->accueil(intval($_GET['cat']));
-        }
-        else {
-            $this->ctrlCatalog->accueil(0);
+        if (isset($_POST['searchItemsRequest'])) {
+            $txtSearched = $this->getParameter($_POST,"searchTextZone");
+            $this->ctrlCatalog->accueil(0, $txtSearched);
+        } else {
+            if (isset($_GET['cat'])) {
+                $this->ctrlCatalog->accueil(intval($_GET['cat']));
+            }
+            else {
+                $this->ctrlCatalog->accueil(0);
+            }
         }
     }
 
