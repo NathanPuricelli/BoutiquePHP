@@ -10,6 +10,7 @@ let count = 1;
 
 function updateDisplay() {
     counterDisplayElem.innerHTML = count;
+    document.addToCartForm.hiddenQuantity.value = count;
 };
 
 counterMinusElem.addEventListener("click",()=>{

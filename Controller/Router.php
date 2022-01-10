@@ -216,6 +216,7 @@ class Router {
 
     private function routCart()
     {
+        echo $_POST['hiddenQuantity'];
         if (isset($_POST['addedToCart']))
         {
             if ($_SESSION["SESS_ORDERNUM"] == null)
