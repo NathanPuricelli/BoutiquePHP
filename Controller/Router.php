@@ -16,6 +16,7 @@ class Router {
     private $ctrlLogin;
     private $ctrlRegister;
     private $ctrlAdminPannel;
+    private $ctrlCheckout;
 
     public function __construct() {
         $this->ctrlCatalog = new ControllerCatalog();
@@ -24,6 +25,7 @@ class Router {
         $this->ctrlLogin = new ControllerLogin();
         $this->ctrlRegister = new ControllerRegister();
         $this->ctrlAdminPannel = new ControllerAdminPannel();
+        $this->ctrlCheckout = new ControllerCheckout();
     }
     
     public function routing(){
@@ -78,6 +80,13 @@ class Router {
                         
                         $this->routCart();
                         break;
+                    
+                    case 'checkout':
+                        if ($this->ctrlCart->ctrlGetOrderStatus($_SESSION["SESS_ORDERNUM"]) == 0)
+                        {
+                            $this->ctrlCheckout->ctrlSetOrderStatus($_SESSION["SESS_ORDERNUM"],1);
+                        }
+                        $this->routCheckout();
                     
                     default:
                         throw new Exception("Action non valide");
@@ -272,6 +281,11 @@ class Router {
             $this->ctrlAdminPannel->showPannel();
         }
 
+    }
+
+    private function routCheckout()
+    {
+        $this->ctrlCheckout->showCheckout(20);
     }
 
 
