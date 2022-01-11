@@ -31,6 +31,18 @@ class Router {
     
     public function routing(){
         try {
+            if (isset($_GET["reset"])) //Pour changer le status de la commande si l'utilisateur décide de l'annuler.
+            {
+                $this->ctrlCheckout->ctrlSetOrderStatus($_SESSION["SESS_ORDERNUM"],0);
+                if($_SESSION["logged"])
+                {
+                    $this->setSessionOrder($_SESSION["username"]);
+                }
+                else 
+                {
+                    $this->setSessionOrder();
+                }
+            }
             if (isset($_GET['page'])) {
                 switch ($_GET['page'])
                 {
@@ -82,6 +94,7 @@ class Router {
                         if ($_SESSION["SESS_ORDERSTATUS"] == 1)
                         {
                             $this->routCheckout();
+                            break;
                         }
                         
                         $this->routCart();

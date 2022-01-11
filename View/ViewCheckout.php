@@ -59,5 +59,6 @@
             </div>
             
         </form>
+        <a href="index.php?reset=true"><button class="btn1">Annuler Paiement</button></a>
     </div>
 </div>

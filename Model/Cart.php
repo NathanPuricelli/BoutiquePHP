@@ -115,6 +115,7 @@ class Cart extends Model {
             $sql = "UPDATE orderitems set quantity = ? WHERE order_id = ? and product_id = ?";
             $qty = $qty->fetch();
             $newQuantity = intval($quantity) + intval($qty["quantity"]);
+            $_SESSION["nqty"] = $newQuantity;
             
             try{
                 $this->executerRequete($sql, array($newQuantity, $order_id, $order_id));
