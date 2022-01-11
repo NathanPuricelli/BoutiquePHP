@@ -1,10 +1,11 @@
 <?php $this->title = "Paiement"; ?>
 <!-- Formulaire de remplissage -->
 
-<?= "Prix à payer : '$price'" ?>
+
 
 <div class="container">
     <div class="text-center">
+        <?= "<h2> Prix à payer : $price € </h2>" ?>
         <h1>Veuillez saisir les informations</h1>
     </div>
     <div class="containerLogin">
