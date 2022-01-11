@@ -126,7 +126,7 @@ class Cart extends Model {
             $_SESSION["nqty"] = $newQuantity;
             
             try{
-                $this->executerRequete($sql, array($newQuantity, $order_id, $order_id));
+                $this->executerRequete($sql, array($newQuantity, $order_id, $product_id));
             }
             catch (Exception $e) {
                 return $e->getMessage();
