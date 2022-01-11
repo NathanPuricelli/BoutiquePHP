@@ -6,6 +6,7 @@ require_once 'Controller/ControllerCart.php';
 require_once 'Controller/ControllerLogin.php';
 require_once 'Controller/ControllerRegister.php';
 require_once 'Controller/ControllerAdminPannel.php';
+require_once 'Controller/ControllerCheckout.php';
 
 require_once 'View/View.php';
 class Router {

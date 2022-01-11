@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Model/Cart.php';
+require_once 'Model/Checkout.php';
 require_once 'View/View.php';
 
 class ControllerCheckout {
@@ -24,7 +24,7 @@ class ControllerCheckout {
     public function showCheckout($price)
     {
         $view = new View("Checkout");
-        $view->generate(array('products' => $price));
+        $view->generate(array('price' => $price));
     }
 
 }

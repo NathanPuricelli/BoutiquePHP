@@ -160,7 +160,7 @@ a, a:hover, a:active, a:visited  {
     height: 45px;
     width: auto;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     outline: none;
     background-color: var(--custom-color-basic);
 
