@@ -85,50 +85,59 @@ class Cart extends Model {
         }
     }
 
+    public function removeFromOrder($order_id, $product_id)
+    {
+        
+    }
+
     public function addProductToOrder($order_id, $product_id, $quantity){
-        $sql = "insert into orderitems (order_id, product_id, quantity)
-        values (?, ?, ?)";
+        $sql1 = "select quantity from orderitems where order_id = ? and product_id = ?";
+        try
+        {
+            $qty = $this->executerRequete($sql1, array($order_id, $product_id));
+
+        }
+        catch (Exception $e) {
+            return $e->getMessage();
+        }
+        if ($qty->rowCount() > 0) {
+            $sql = "UPDATE orderitems set quantity = ? WHERE order_id = ? and product_id = ?";
+            $qty = $qty->fetch();
+            $newQuantity = intval($quantity) + intval($qty["quantity"]);
+            
+            try{
+                $this->executerRequete($sql, array($newQuantity, $order_id, $order_id));
+            }
+            catch (Exception $e) {
+                return $e->getMessage();
+            }
+        }
+        else
+        {
+            $sql = "insert into orderitems (order_id, product_id, quantity)
+            values (?, ?, ?)";
+            try{
+                $this->executerRequete($sql, array($order_id, $product_id, $quantity));
+            }
+            catch (Exception $e) {
+                return $e->getMessage();
+            }
+        }
+        $this->updateTotal($order_id);
+    }
+
+    public function updateTotal($order_id)
+    {
+        $sql = "UPDATE orders
+        SET total = (SELECT SUM(P.price * O.quantity) FROM orderitems O JOIN products P ON O.product_id = P.id
+                    WHERE O.order_id = ?)
+        Where id = ?";
         try{
-            $this->executerRequete($sql, array($order_id, $product_id, $quantity));
-            $this->mergeSameItemsCart($order_id, $product_id);
+            $this->executerRequete($sql, array($order_id, $order_id));
         }
         catch (Exception $e) {
             return $e->getMessage();
         }
     }
 
-    private function existsInOrder($order_id, $product_id)
-    {
-        $sql = "select * from orderitems where order_id = ? and product_id = ?";
-        $product = $this->executerRequete($sql, array($order_id, $product_id ));
-        return ($product->rowCount() > 1);
-    }
-
-    private function mergeSameItemsCart($order_id, $product_id)
-    {
-        if ($this->existsInOrder($order_id, $product_id))
-        {
-            $sql = "UPDATE orderitems
-            set quantity = (SELECT SUM(quantity) FROM orders WHERE product_id = ? and order_id = ?)
-            where product_id = ? and order_id = ?";
-            $sql2 = "DELETE
-                    FROM   orderitems
-                    WHERE  id IN (
-                                   SELECT MAX(id)
-                                   FROM   orderitems
-                                    WHERE order_id = ? and product_id = ?
-                                   GROUP BY order_id, product_id, quantity
-                                   HAVING COUNT(*) > 1
-                                  )";
-            try{
-                $this->executerRequete($sql, array($product_id, $order_id, $product_id, $order_id));
-                $this->executerRequete($sql2, array($order_id, $product_id));
-            }
-            catch (Exception $e) {
-                return $e->getMessage();
-            }
-        }
-
-
-    }
 };

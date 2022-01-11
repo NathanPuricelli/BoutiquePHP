@@ -26,4 +26,16 @@ class Checkout extends Model {
             return $e->getMessage();
         }
     }
+
+    public function getTotal($order_id)
+    {
+        $sql = "select total from orders WHERE id = ?";
+        $total = $this->executerRequete($sql, array($order_id));
+        if ($total->rowCount() > 0) {
+            return $total->fetch();
+        }
+        else {
+            return 0;
+        }
+    }
 }
