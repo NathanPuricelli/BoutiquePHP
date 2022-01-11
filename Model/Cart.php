@@ -61,7 +61,7 @@ class Cart extends Model {
     
     public function getCartContent($order_id)
     {
-        $sql = "SELECT P.name, P.image, P.price, O.quantity FROM products P JOIN orderitems O on P.id = O.product_id
+        $sql = "SELECT P.id, P.name, P.image, P.price, O.quantity FROM products P JOIN orderitems O on P.id = O.product_id
         where O.order_id = ?";
         $product = $this->executerRequete($sql, array($order_id));
         if ($product->rowCount() > 0)

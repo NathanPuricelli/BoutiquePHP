@@ -304,10 +304,21 @@ a, a:hover, a:active, a:visited  {
 
 /* PANIER */
 .productInCart {
+    width: 80%;
     background-color: #fff;
     box-shadow: 0 0 24px rgba(13, 13, 13, .04);
     padding: 10px;
-    margin:20px;
+    margin: 20px auto 20px auto;
+}
+
+.mediumItemImage {
+    max-width: 200px;
+    height: auto;
+}
+
+.centerElementCart {
+    margin:auto;
+    text-align: center;
 }
 
 /* PANNEL ADMINISTRATEUR */
@@ -322,7 +333,7 @@ a, a:hover, a:active, a:visited  {
     background-color: #fff;
     box-shadow: 0 0 24px rgba(13, 13, 13, .04);
     padding: 10px;
-    margin:20px;
+    margin: 20px;
 }
 
 .orderBox {

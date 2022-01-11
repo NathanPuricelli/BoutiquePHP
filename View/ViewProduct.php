@@ -30,20 +30,18 @@
                 <?php if ($product['quantity'] != 0):?>
                     <p>Combien en voulez-vous ?</p>
                     <p>
-                        <!-- Sortir les boutons de la classe à modifier ou ajouter un span autour du 1-->
                         <button class="btn2 counterMinus" type="submit">-</button>
                         <span class="counterSection">1</span>
                         <button class="btn2 counterPlus" type="submit">+</button>
                     </p>
-                    <button class="btn1" type="submit">Ajouter au panier</button>
+                    <form action = "index.php?page=Cart" method="POST" id="addToCartForm" name="addToCartForm">
+                        <input type='hidden' id='hiddenQuantity' name='hiddenQuantity' value='1'>
+                        <?=  "<input type='hidden' id='idProduct' name='idProduct' value=".$product['id'].">" ?>
+                        <input class="btn1" type="submit" name = "addedToCart" value="Ajouter au panier">
+                    </form>
                 <?php else: ?>
                     <h5 class="unavailableProductText">Article en rupture de stock</h5>
                 <?php endif; ?>
-                <form action = "index.php?page=Cart" method="POST" id="addToCartForm" name="addToCartForm">
-                    <input type='hidden' id='hiddenQuantity' name='hiddenQuantity' value='1'>
-                    <?=  "<input type='hidden' id='idProduct' name='idProduct' value=".$product['id'].">" ?>
-                    <input type="submit" name = "addedToCart" value="Ajouter au panier">
-                </form>
         </div>
     </div>
 
