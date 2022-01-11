@@ -20,7 +20,11 @@ class ControllerCheckout {
     {
         return $this->checkout->setOrderStatus($order_id, $status);
     }
-
+    
+    public function ctrlGetTotal($order_id)
+    {
+        return $this->checkout->getTotal($order_id);
+    }
     public function showCheckout($price)
     {
         $view = new View("Checkout");

@@ -78,16 +78,36 @@ class Router {
                         if (!$_SESSION["logged"]) { //Si l'utilisateur n'est pas connecté : affichage de la page connexion
                             $this->setSessionOrder();
                         }
+
+                        if ($_SESSION["SESS_ORDERSTATUS"] == 1)
+                        {
+                            $this->routCheckout();
+                        }
                         
                         $this->routCart();
                         break;
                     
                     case 'checkout':
-                        if ($this->ctrlCart->ctrlGetOrderStatus($_SESSION["SESS_ORDERNUM"]) == 0)
+                        if (isset($_POST['continueToCheckout']) || $_SESSION["SESS_ORDERSTATUS"] == 1)
                         {
-                            $this->ctrlCheckout->ctrlSetOrderStatus($_SESSION["SESS_ORDERNUM"],1);
+                            if ($_SESSION["SESS_ORDERSTATUS"] == 0)
+                            {
+                                $this->ctrlCheckout->ctrlSetOrderStatus($_SESSION["SESS_ORDERNUM"],1);
+                                if($_SESSION["logged"])
+                                {
+                                    $this->setSessionOrder($_SESSION["username"]);
+                                }
+                                else 
+                                {
+                                    $this->setSessionOrder();
+                                }
+                                
+                            }
+                            $this->routCheckout();
                         }
-                        $this->routCheckout();
+                        else {
+                            header('Location: index.php');
+                        }
                     
                     default:
                         throw new Exception("Action non valide");
@@ -243,7 +263,7 @@ class Router {
 
             }
 
-            $this->ctrlCart->ctrlAddItemToOder($_SESSION["SESS_ORDERNUM"], $_POST['idProduct'], 1); //Remplacer 1 par $_POST['hiddenQuantity']
+            $this->ctrlCart->ctrlAddItemToOder($_SESSION["SESS_ORDERNUM"], $_POST['idProduct'], $_POST['hiddenQuantity']); //Remplacer 1 par $_POST['hiddenQuantity']
         }
 
         if ($_SESSION["SESS_ORDERNUM"] != null) // si la session / l'utilisateur a déja un panier on l'affiche
@@ -286,7 +306,9 @@ class Router {
 
     private function routCheckout()
     {
-        $this->ctrlCheckout->showCheckout(20);
+        $total = $this->ctrlCheckout->ctrlGetTotal($_SESSION["SESS_ORDERNUM"]);
+        $total = $total['total'];
+        $this->ctrlCheckout->showCheckout($total);
     }
 
 
@@ -306,8 +328,9 @@ class Router {
         }
         else
         {
-            $_SESSION["SESS_ORDERNUM"] = $orderNum["id"];
-            $_SESSION["SESS_ORDERSTATUS"] = $this->ctrlCart->ctrlGetOrderStatus(intval($orderNum["id"]))["status"];
+            $_SESSION["SESS_ORDERNUM"] = intval($orderNum["id"]);
+            $orderstatus = $this->ctrlCart->ctrlGetOrderStatus(intval($orderNum["id"]));
+            $_SESSION["SESS_ORDERSTATUS"] = intval($orderstatus["status"]);
         }
     }
 
