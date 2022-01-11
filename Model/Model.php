@@ -29,4 +29,9 @@ abstract class Model {
         return $this->bdd;
     }
 
+    public function getLastInsertId()
+    {
+        return $this->getBdd()->lastInsertId();
+    }
+
 }
