@@ -98,7 +98,15 @@ class Cart extends Model {
 
     public function removeFromOrder($order_id, $product_id)
     {
-
+        $sql = "DELETE from orderitems
+        where order_id = ? and product_id = ?";
+        try{
+            $this->executerRequete($sql, array($order_id, $product_id ));
+            $this->updateTotal($order_id);
+        }
+        catch (Exception $e) {
+            return $e->getMessage();
+        }
     }
 
     public function addProductToOrder($order_id, $product_id, $quantity){

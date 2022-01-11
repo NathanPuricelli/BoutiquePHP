@@ -18,6 +18,11 @@ class ControllerCart {
         return $this->cart->getOrderStatus($order_id);
     }
 
+    public function ctrlRemoveItemFromCart($order_id, $product_id)
+    {
+        return $this->cart->removeFromOrder($order_id, $product_id);
+    }
+
     public function ctrlGetOrderId($username = null, $session = null)
     {
         return $this->cart->getOrderId($username, $session);

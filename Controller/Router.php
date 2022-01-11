@@ -279,6 +279,11 @@ class Router {
             $this->ctrlCart->ctrlAddItemToOder($_SESSION["SESS_ORDERNUM"], $_POST['idProduct'], $_POST['hiddenQuantity']); //Remplacer 1 par $_POST['hiddenQuantity']
         }
 
+        if (isset($_POST["removeItemRequest"]))
+        {
+            $this->ctrlCart->ctrlRemoveItemFromCart($_SESSION["SESS_ORDERNUM"], $this->getParameter($_POST, "itemToRemoveId"));
+        }
+
         if ($_SESSION["SESS_ORDERNUM"] != null) // si la session / l'utilisateur a déja un panier on l'affiche
         {
             $this->ctrlCart->showCart($_SESSION["SESS_ORDERNUM"]);
