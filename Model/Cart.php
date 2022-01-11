@@ -32,21 +32,18 @@ class Cart extends Model {
 
     }
 
-    public function getOrderStatus($order_id)
-    {
+    public function getOrderStatus($order_id) {
         $sql = "select status from orders WHERE id = ? and status != 10";
         $status = $this->executerRequete($sql, array($order_id));
         if ($status->rowCount() > 0) {
             return $status->fetch();
         }
-        else 
-        {
+        else {
             throw new Exception("Aucun status n'est associé à la commande '$order_id'");
         }
     }
 
-    public function getCustomerId($username)
-    {
+    public function getCustomerId($username) {
         $sql = "select customer_id from logins WHERE username = ?";
         $id = $this->executerRequete($sql, array($username));
         if ($id->rowCount() > 0) {
@@ -59,8 +56,7 @@ class Cart extends Model {
     }
 
     
-    public function getCartContent($order_id)
-    {
+    public function getCartContent($order_id) {
         $sql = "SELECT P.id, P.name, P.image, P.price, O.quantity FROM products P JOIN orderitems O on P.id = O.product_id
         where O.order_id = ?";
         $product = $this->executerRequete($sql, array($order_id));
@@ -71,8 +67,8 @@ class Cart extends Model {
         else
             return array();
     }
-    public function getTotal($order_id)
-    {
+
+    public function getTotal($order_id) {
         $sql = "select total from orders WHERE id = ?";
         $total = $this->executerRequete($sql, array($order_id));
         if ($total->rowCount() > 0) {
@@ -96,11 +92,10 @@ class Cart extends Model {
         }
     }
 
-    public function removeFromOrder($order_id, $product_id)
-    {
+    public function removeFromOrder($order_id, $product_id) {
         $sql = "DELETE from orderitems
         where order_id = ? and product_id = ?";
-        try{
+        try {
             $this->executerRequete($sql, array($order_id, $product_id ));
             $this->updateTotal($order_id);
         }
@@ -109,7 +104,7 @@ class Cart extends Model {
         }
     }
 
-    public function addProductToOrder($order_id, $product_id, $quantity){
+    public function addProductToOrder($order_id, $product_id, $quantity) {
         $sql1 = "select quantity from orderitems where order_id = ? and product_id = ?";
         try
         {
@@ -123,20 +118,28 @@ class Cart extends Model {
             $sql = "UPDATE orderitems set quantity = ? WHERE order_id = ? and product_id = ?";
             $qty = $qty->fetch();
             $newQuantity = intval($quantity) + intval($qty["quantity"]);
-            $_SESSION["nqty"] = $newQuantity;
-            
-            try{
-                $this->executerRequete($sql, array($newQuantity, $order_id, $product_id));
-            }
-            catch (Exception $e) {
-                return $e->getMessage();
+
+            $quantityAvailableRequest = "SELECT quantity FROM products WHERE id = ?";
+            $qtyAvblRqst = $this->executerRequete($quantityAvailableRequest, array($product_id));
+            $qtyAvblRqst_SingleRow = $qtyAvblRqst->fetch();
+            if ($newQuantity <= $qtyAvblRqst_SingleRow['quantity']) {
+                if ($newQuantity == 0) {
+                    $this->removeFromOrder($order_id, $product_id);
+                }
+                else {
+                    try{
+                        $this->executerRequete($sql, array($newQuantity, $order_id, $product_id));
+                    }
+                    catch (Exception $e) {
+                        return $e->getMessage();
+                    }
+                } 
             }
         }
-        else
-        {
+        else {
             $sql = "insert into orderitems (order_id, product_id, quantity)
             values (?, ?, ?)";
-            try{
+            try {
                 $this->executerRequete($sql, array($order_id, $product_id, $quantity));
             }
             catch (Exception $e) {

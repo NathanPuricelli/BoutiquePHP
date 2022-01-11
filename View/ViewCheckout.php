@@ -9,6 +9,9 @@
         <h1>Veuillez saisir les informations</h1>
     </div>
     <div class="containerLogin">
+        <div class="buttonHolder">
+            <a href="index.php?reset=true"><button class="btn1">Annuler Paiement</button></a>
+        </div>
         <form action="index.php?page=profil" method='post'>
             <div class="row">
                 <div class="col">
@@ -59,6 +62,6 @@
             </div>
             
         </form>
-        <a href="index.php?reset=true"><button class="btn1">Annuler Paiement</button></a>
+
     </div>
 </div>

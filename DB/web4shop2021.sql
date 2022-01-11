@@ -41,7 +41,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `username`, `password`) VALUES
-(1, 'john', 'f18bd055eec95965ee175fa9badd35ae6dbeb98f');
+(1, 'john', 'f18bd055eec95965ee175fa9badd35ae6dbeb98f'), 
+(2, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997'), ;
 
 -- --------------------------------------------------------
 
@@ -194,7 +195,7 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`id`, `customer_id`, `registered`, `delivery_add_id`, `payment_type`, `date`, `status`, `session`, `total`) VALUES
 (63, '1', 1, 47, 'cheque', '2020-01-23', 10, 'da8bcdf51121d96c71673295b825a010', 86.2),
-(64, '1', 1, 47, 'paypal', '2020-01-23', 3, 'da8bcdf51121d96c71673295b825a010', 87),
+(64, '1', 1, 47, 'paypal', '2020-01-23', 1, 'da8bcdf51121d96c71673295b825a010', 87),
 (65, '2', 1, 49, 'cheque', '2020-01-23', 10, 'da8bcdf51121d96c71673295b825a010', 51.2),
 (66, '2', 1, 49, 'cheque', '2020-01-23', 2, 'da8bcdf51121d96c71673295b825a010', 42.3);
 

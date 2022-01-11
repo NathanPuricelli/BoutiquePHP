@@ -56,7 +56,7 @@ if (!isset($_SESSION["logged_as_admin"])) { //Si la variable de connexion n'est 
                             </li>';
                     } else {
                       echo '<li class="nav-item"> 
-                              <a class="nav-link" href="?page=profil">Profil : '. $_SESSION["username"] .'</a>
+                              <a class="nav-link" href="?page=profile">Profil : '. $_SESSION["username"] .'</a>
                             </li>';
                     }
                   } else {
