@@ -41,8 +41,9 @@ class ControllerCart {
     public function showCart($order_id) {
         // Affiche la liste des articles dans le panier, et les informations pour regler
         $products = $this->cart->getCartContent($order_id);
+        $total = $this->cart->getTotal($order_id);
         $view = new View("Cart");
-        $view->generate(array('products' => $products));
+        $view->generate(array('products' => $products, 'total' => $total));
     }
 
 }

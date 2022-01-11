@@ -37,7 +37,7 @@
     </div>
     <?php endforeach; ?>
     <div class="productInCart text-center">
-        <h2>Total : BEAUCOUP D'ARGENT</h2>
+        <h2><?= "Total : ".$total['total']." €"?></h2>
     </div>
 
     <form action="index.php?page=checkout" method='post'>

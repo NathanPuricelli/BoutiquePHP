@@ -71,6 +71,17 @@ class Cart extends Model {
         else
             return array();
     }
+    public function getTotal($order_id)
+    {
+        $sql = "select total from orders WHERE id = ?";
+        $total = $this->executerRequete($sql, array($order_id));
+        if ($total->rowCount() > 0) {
+            return $total->fetch();
+        }
+        else {
+            return 0;
+        }
+    }
 
 
     public function createOrder($customer_id, $session, $registered) // l'id custommer sera 0 si l'utilisateur n'est pas connecté.
@@ -87,7 +98,7 @@ class Cart extends Model {
 
     public function removeFromOrder($order_id, $product_id)
     {
-        
+
     }
 
     public function addProductToOrder($order_id, $product_id, $quantity){
