@@ -67,8 +67,19 @@
             </div>
             <div class="col">
                 <div class="row">
-                    <div class="col-2 reviewUserName"><?= $review['name_user'] ?></div>
-                    <div class="col"><?= "( ".$review['stars'] ." étoiles ) ". $review['title'] ?></div>
+                    <div class="col-2 reviewUserName"><h5><?= $review['name_user'] ?></h5></div>
+                    <?php
+                    for ($i=1; $i<=5; $i++) {
+                        echo "<div class='col-1 reviewImgSection'>";
+                        if ($i <= $review['stars']) {
+                            echo "<img src='assets/img/review_star.png' class ='reviewStars'>";
+                        } else {
+                            echo "<img src='assets/img/review_gray.png' class ='reviewStars'>";
+                        }
+                        echo "</div>";
+                    }
+                    ?>
+                    <div class="col titleSection"><?= "|   ".$review['title'] ?></div>
                 </div>
                 <div class="row">
                     <div class="col reviewDescription"><?= $review['description'] ?></div>

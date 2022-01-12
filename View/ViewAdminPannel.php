@@ -1,8 +1,6 @@
 <?php $this->title = "Admin pannel"; ?>
 
 
-
-
 <!-- PARTIE COMMANDES -->
 
 <div class="container">
@@ -110,6 +108,13 @@
                     <form action = "index.php?page=adminPannel" method="POST" class="text-center">
                         <?=  "<input type='hidden' id='idOrder' name='idOrder' value=".$order['id'].">" ?>
                         <button class="btn1" type="submit" name='confirmOrder'>Confirmer la commande</button>
+                    </form>
+                </div>
+                <?php elseif($order['status'] == 10):?>
+                <div class="col">
+                    <form action = "index.php?page=adminPannel" target="_blank" method="POST" class="text-center">
+                        <?=  "<input type='hidden' name='PDF_customer_forname' value=".$order['customer']['forname'].">" ?>
+                        <button class="btn1" type="submit" name='createPDF'>Obtenir la facture</button>
                     </form>
                 </div>
                 <?php endif;?>

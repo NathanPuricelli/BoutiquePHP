@@ -1,3 +1,8 @@
-<?php $this->title = "Super Site - error !"; ?>
+<?php $this->title = "Extra Eats - Erreur !"; ?>
 
-<p><?= $msgErreur ?></p>
+<div class="text-center">
+    <h1><?= $msgErreur ?></h1>
+</div>
+<div class="buttonHolder">
+    <a href="index.php"><button class="btn1">Retour boutique</button></a>
+</div>

@@ -8,6 +8,7 @@ require_once 'Controller/ControllerRegister.php';
 require_once 'Controller/ControllerAdminPannel.php';
 require_once 'Controller/ControllerCheckout.php';
 require_once 'Controller/ControllerProfile.php';
+require_once 'assets/fpdf/createOrderPDF.php';
 
 
 require_once 'View/View.php';
@@ -304,6 +305,11 @@ class Router {
     }
 
     private function routAdminPannel() {
+        if (isset($_POST['createPDF'])) {
+            $pdf = new myPDF('P', 'mm', 'A4');
+            $pdf->createOrderPDF($_POST['PDF_customer_forname']);
+        }
+
         if (isset($_POST['register-request'])) {
             $username = $this->getParameter($_POST,"register_form_username_admin");
             $hashedPassword = sha1($this->getParameter($_POST,"register_form_password_admin"));

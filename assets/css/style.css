@@ -247,6 +247,19 @@ a, a:hover, a:active, a:visited  {
     padding-left: 10px;
 }
 
+.reviewBox .reviewImgSection {
+    float:left;
+    width: 35px;
+}
+.reviewBox .titleSection {
+    padding-left: 10px;
+}
+
+.reviewBox .reviewStars {
+    width: 35px;
+    height: auto;
+}
+
 .reviewBox .reviewImg {
     width: 90px;
     height: 90px;
