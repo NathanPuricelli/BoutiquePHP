@@ -7,6 +7,8 @@ require_once 'Controller/ControllerLogin.php';
 require_once 'Controller/ControllerRegister.php';
 require_once 'Controller/ControllerAdminPannel.php';
 require_once 'Controller/ControllerCheckout.php';
+require_once 'Controller/ControllerProfile.php';
+
 
 require_once 'View/View.php';
 class Router {
@@ -18,6 +20,7 @@ class Router {
     private $ctrlRegister;
     private $ctrlAdminPannel;
     private $ctrlCheckout;
+    private $ctrlProfile;
 
     public function __construct() {
         $this->ctrlCatalog = new ControllerCatalog();
@@ -27,6 +30,7 @@ class Router {
         $this->ctrlRegister = new ControllerRegister();
         $this->ctrlAdminPannel = new ControllerAdminPannel();
         $this->ctrlCheckout = new ControllerCheckout();
+        $this->ctrlProfile = new ControllerProfile();
     }
     
     public function routing(){
@@ -117,10 +121,17 @@ class Router {
                                 
                             }
                             $this->routCheckout();
+                            break;
                         }
                         else {
                             header('Location: index.php');
                         }
+
+                    case 'profile':
+                        $this->routProfile();
+                        break;
+                        
+
                     
                     default:
                         throw new Exception("Action non valide");
@@ -327,6 +338,36 @@ class Router {
         $total = $this->ctrlCheckout->ctrlGetTotal($_SESSION["SESS_ORDERNUM"]);
         $total = $total['total'];
         $this->ctrlCheckout->showCheckout($total);
+    }
+
+    private function routProfile()
+    {
+        if (isset($_POST["checkout-request"]))
+        {
+            $this->ctrlCheckout->ctrlAddAdressToOrder($_SESSION["SESS_ORDERNUM"], $this->getParameter($_POST, "checkout_form_firstname"), 
+                                                    $this->getParameter($_POST, "checkout_form_surname"), $this->getParameter($_POST, "checkout_form_add1"),
+                                                    $this->getParameter($_POST, "checkout_form_city"), $this->getParameter($_POST, "checkout_form_postcode"),
+                                                    $this->getParameter($_POST, "checkout_form_phone"),$this->getParameter($_POST, "checkout_form_email"));
+            $this->ctrlProfile->ctrlPayOrder($_SESSION["SESS_ORDERNUM"], $this->getParameter($_POST, "checkout_form_paymentType"));
+            if($_SESSION["logged"])
+            {
+                $this->setSessionOrder($_SESSION["username"]);
+            }
+            else 
+            {
+                $this->setSessionOrder();
+            }
+        }
+        if(isset($_SESSION["logged"]))
+        {
+            $this->ctrlProfile->showProfile( session_id(),$_SESSION["username"]);
+        }
+        else
+        {
+            $this->ctrlProfile->showProfile(session_id());
+        }
+        
+
     }
 
 

@@ -13,7 +13,7 @@ class AdminPannel extends Model {
     }
 
     public function getOrders() {
-        $sql = "SELECT * FROM orders";
+        $sql = "SELECT * FROM orders order by id desc";
         $orders = $this->executerRequete($sql);
         return $orders;
     }
@@ -22,7 +22,11 @@ class AdminPannel extends Model {
         $sql = "SELECT * FROM customers WHERE id = ?";
         $query = $this->executerRequete($sql, array($id));
         $q = $query->fetch();
-        return $q; //On renvoie uniquement la ligne du client, et pas toute la table obtenue dans $query
+        if($id != 0)
+        {
+            return $q; //On renvoie uniquement la ligne du client, et pas toute la table obtenue dans $query
+        }
+        else return array('forname' => "Utilisateur", "surname" => "Anonyme");
     }
 
     public function getAddress($id) {

@@ -12,7 +12,7 @@
         <div class="buttonHolder">
             <a href="index.php?reset=true"><button class="btn1">Annuler Paiement</button></a>
         </div>
-        <form action="index.php?page=profil" method='post'>
+        <form action="index.php?page=profile" method='post'>
             <div class="row">
                 <div class="col">
                     <label for="inputFirstName">Prénom</label>
@@ -52,7 +52,7 @@
             <div class="text-center">
                 <h5>Choisissez votre mode de paiement</h5>
             </div>
-            <select class="form-select">
+            <select class="form-select" name="checkout_form_paymentType">
                 <option selected value="1">Paypal</option>
                 <option value="2">Chèque</option>
                 <option value="3">Carte Bancaire</option>

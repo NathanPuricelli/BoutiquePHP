@@ -109,7 +109,7 @@
                 <div class="col">
                     <form action = "index.php?page=adminPannel" method="POST" class="text-center">
                         <?=  "<input type='hidden' id='idOrder' name='idOrder' value=".$order['id'].">" ?>
-                        <button class="btn1" type="submit" name='confirmOrder'>Confirmer la commander</button>
+                        <button class="btn1" type="submit" name='confirmOrder'>Confirmer la commande</button>
                     </form>
                 </div>
                 <?php endif;?>
