@@ -102,7 +102,7 @@ CREATE TABLE `delivery_addresses` (
   `firstname` varchar(50) NOT NULL,
   `lastname` varchar(50) NOT NULL,
   `add1` varchar(50) NOT NULL,
-  `add2` varchar(50) NOT NULL,
+  `add2` varchar(50),
   `city` varchar(50) NOT NULL,
   `postcode` varchar(10) NOT NULL,
   `phone` varchar(20) NOT NULL,

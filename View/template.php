@@ -44,7 +44,7 @@ if (!isset($_SESSION["logged_as_admin"])) { //Si la variable de connexion n'est 
                 <li class="nav-item">
                   <a class="nav-link" href="?page=Cart">Panier</a>
                 </li>
-                <?= var_dump($_SESSION) ?>
+                <!--<?= var_dump($_SESSION) ?>-->
                 <?php
                   if ($_SESSION["logged"]) {
                     echo '<li class="nav-item">
