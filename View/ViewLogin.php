@@ -20,7 +20,7 @@
                 <input type="password" class="form-control" name="login_form_password" placeholder="Votre mot de passe">
             </div>
             <div class="buttonHolder">
-                <button class="btn1" type="submit" name='login-request' style="margin-left:auto;margin-right:auto;">Se connecter</button>
+                <button class="btn1" type="submit" name='login-request' style="margin-left:auto;margin-right:auto;">SE CONNECTER</button>
             </div>
         </form>
     </div>

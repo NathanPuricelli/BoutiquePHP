@@ -43,7 +43,7 @@
                         <input type="password" class="form-control" name="register_form_password_confirmation_admin" placeholder="Confirmation" required>
                     </div>
                     <div class="buttonHolder">
-                        <button class="btn1" type="submit" name='register-request'>Ajouter l'utilisateur</button>
+                        <button class="btn1" type="submit" name='register-request'>AJOUTER L'UTILISATEUR</button>
                     </div>
                 </form>
             </div>
@@ -60,15 +60,15 @@
         <div class="orderBox">
         <?php endif;?>
             <div class="row" style="text-align:center;">
-                <div class="col-5">
-                    <h5>Commande #<?= $order['id'] ?></h5>
+                <div class="col-5" style="text-align:left;">
+                    <h5>COMMANDE #<?= $order['id'] ?></h5>
                     <p><?= $order['date'] ?><br/>
                     <?= $order['total'] ?> € (Par <?= $order['payment_type'] ?>)</p>
                 </div>
                 <div class="col-3">
                     <p>Client : <?= $order['customer']['forname']." ".$order['customer']['surname'] ?></p>
                 </div>
-                <div class="col-4">
+                <div class="col-4" style="text-align:right;">
                     <p>Adresse : <?= $order['address']['add1'] ?> <br/>
                     <?= $order['address']['city'] ?> <br/>
                     <?= $order['address']['postcode'] ?></p>
@@ -107,14 +107,14 @@
                 <div class="col">
                     <form action = "index.php?page=adminPannel" method="POST" class="text-center">
                         <?=  "<input type='hidden' id='idOrder' name='idOrder' value=".$order['id'].">" ?>
-                        <button class="btn1" type="submit" name='confirmOrder'>Confirmer la commande</button>
+                        <button class="btn1" type="submit" name='confirmOrder'>CONFIRMER LA COMMANDE</button>
                     </form>
                 </div>
                 <?php elseif($order['status'] == 10):?>
                 <div class="col">
                     <form action = "index.php?page=adminPannel" target="_blank" method="POST" class="text-center">
                         <?=  "<input type='hidden' name='PDF_customer_forname' value=".$order['customer']['forname'].">" ?>
-                        <button class="btn1" type="submit" name='createPDF'>Obtenir la facture</button>
+                        <button class="btn1" type="submit" name='createPDF'>OBTENIR LA FACTURE</button>
                     </form>
                 </div>
                 <?php endif;?>

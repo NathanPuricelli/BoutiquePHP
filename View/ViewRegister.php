@@ -74,7 +74,7 @@
                 </div>
             </div>
             <div class="buttonHolder">
-                <button class="btn1" type="submit" name='register-request'>S'inscrire</button>
+                <button class="btn1" type="submit" name='register-request'>S'INSCRIRE</button>
             </div>
         </form>
     </div>

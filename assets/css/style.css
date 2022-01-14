@@ -9,7 +9,7 @@
 body {
     background: #f7f7fa;
     padding-top: 90px;
-    font-family: "Inter", sans-serif;
+    font-family: 'Poppins', sans-serif;
     color: #444444;
 }
 
@@ -160,12 +160,12 @@ a, a:hover, a:active, a:visited  {
     height: 45px;
     width: auto;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     outline: none;
     background-color: var(--custom-color-basic);
 
     color : white;
-    font-weight: 700;
+    /*font-weight: 700;*/
     transition: 0.2s;
 }
 

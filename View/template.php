@@ -19,7 +19,7 @@ if (!isset($_SESSION["logged_as_admin"])) { //Si la variable de connexion n'est 
         <!-- Implémentation des Fonts Google -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins&display=swap" rel="stylesheet">
 
         <link rel="stylesheet" href="assets/css/style.css" />
         <title><?= $title ?></title>

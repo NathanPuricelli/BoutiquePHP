@@ -37,7 +37,7 @@
                     <form action = "index.php?page=Cart" method="POST" id="addToCartForm" name="addToCartForm">
                         <input type='hidden' id='hiddenQuantity' name='hiddenQuantity' value='1'>
                         <?=  "<input type='hidden' id='idProduct' name='idProduct' value=".$product['id'].">" ?>
-                        <input class="btn1" type="submit" name = "addedToCart" value="Ajouter au panier">
+                        <input class="btn1" type="submit" name = "addedToCart" value="AJOUTER AU PANIER">
                     </form>
                 <?php else: ?>
                     <h5 class="unavailableProductText">Article en rupture de stock</h5>
