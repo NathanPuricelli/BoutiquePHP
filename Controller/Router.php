@@ -348,6 +348,10 @@ class Router {
 
     private function routProfile()
     {
+        if (isset($_POST['createPDF'])) {
+            $pdf = new myPDF('P', 'mm', 'A4');
+            $pdf->createOrderPDF($_POST['PDF_customer_forname']);
+        }
         if (isset($_POST["checkout-request"]))
         {
             $this->ctrlCheckout->ctrlAddAdressToOrder($_SESSION["SESS_ORDERNUM"], $this->getParameter($_POST, "checkout_form_firstname"), 

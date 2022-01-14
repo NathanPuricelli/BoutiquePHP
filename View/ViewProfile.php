@@ -62,7 +62,14 @@
                     ?>
                     <h5>Etat de la commande : <?= $txtStatus ?></h5>
                 </div>
-                
+                <?php if($order['status'] == 10 || $order['status'] == 2):?>
+                <div class="col">
+                    <form action = "index.php?page=profile" target="_blank" method="POST" class="text-center">
+                        <?=  "<input type='hidden' name='PDF_customer_forname' value=".$order['customer']['forname'].">" ?>
+                        <button class="btn1" type="submit" name='createPDF'>OBTENIR LA FACTURE</button>
+                    </form>
+                </div>
+                <?php endif;?>
             </div>
         </div>
         <?php endforeach; ?>

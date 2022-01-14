@@ -115,7 +115,8 @@
                         <button class="btn1" type="submit" name='confirmOrder'>CONFIRMER LA COMMANDE</button>
                     </form>
                 </div>
-                <?php elseif($order['status'] == 10):?>
+                <?php endif;?>
+                <?php if($order['status'] == 10 || $order['status'] == 2):?>
                 <div class="col">
                     <form action = "index.php?page=adminPannel" target="_blank" method="POST" class="text-center">
                         <?=  "<input type='hidden' name='PDF_customer_forname' value=".$order['customer']['forname'].">" ?>
