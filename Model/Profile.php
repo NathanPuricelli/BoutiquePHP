@@ -16,11 +16,11 @@ class Profile extends Model {
         }
     }
 
-    public function getAllOrders($session, $username = null)
+    public function getAllOrders($session, $username)
     {
         if($username == null)
         {
-            $sql = "select * from orders where session = ? and status != 0";
+            $sql = "select * from orders where session = ? and registered = 0 and status != 0";
             $result = $this->executerRequete($sql, array($session));
             return $result;
         }

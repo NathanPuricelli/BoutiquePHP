@@ -364,16 +364,7 @@ class Router {
                 $this->setSessionOrder();
             }
         }
-        if(isset($_SESSION["logged"]))
-        {
-            $this->ctrlProfile->showProfile( session_id(),$_SESSION["username"]);
-        }
-        else
-        {
-            $this->ctrlProfile->showProfile(session_id());
-        }
-        
-
+        $this->ctrlProfile->showProfile( session_id(),$_SESSION["username"]); 
     }
 
 

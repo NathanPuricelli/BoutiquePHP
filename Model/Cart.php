@@ -9,7 +9,7 @@ class Cart extends Model {
             $sql = "select O.id
                     from orders O join logins l ON o.customer_id = l.customer_id 
                     where l.username = ?
-                    and O.status != 10 ";
+                    and O.status < 2 ";
             $id = $this->executerRequete($sql, array($username));
             if ($id->rowCount() > 0) {
                 return $id->fetch();
@@ -20,7 +20,7 @@ class Cart extends Model {
         }
         else 
         {
-            $sql = "select id from orders WHERE session = ? and registered = 0 and status != 10";
+            $sql = "select id from orders WHERE session = ? and registered = 0 and status <2";
             $id = $this->executerRequete($sql, array($session));
             if ($id->rowCount() > 0) {
                 return $id->fetch();
@@ -33,7 +33,7 @@ class Cart extends Model {
     }
 
     public function getOrderStatus($order_id) {
-        $sql = "select status from orders WHERE id = ? and status != 10";
+        $sql = "select status from orders WHERE id = ? and status <2";
         $status = $this->executerRequete($sql, array($order_id));
         if ($status->rowCount() > 0) {
             return $status->fetch();

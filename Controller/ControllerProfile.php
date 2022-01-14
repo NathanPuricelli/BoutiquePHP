@@ -22,8 +22,8 @@ class ControllerProfile {
         return $this->profile->payOrder($orderId, $payment_type);
     }
 
-    public function getOrders($session,$username = null) {
-        $ordersTable = $this->profile->getAllOrders($session,$username = null);
+    public function getOrders($session,$username) {
+        $ordersTable = $this->profile->getAllOrders($session,$username);
         $ordersList = array();
         /* On va créer une liste de commandes (orderInfos) dans ordersList, avec :
         orderInfos {
@@ -114,8 +114,8 @@ class ControllerProfile {
         return $ordersList;
     }
 
-    public function showProfile($session,$username = null) {
-        $ordersList = $this->getOrders($session,$username = null);
+    public function showProfile($session,$username) {
+        $ordersList = $this->getOrders($session,$username);
         $view = new View("Profile");
         $view->generate(array('ordersList' => $ordersList));
     }
