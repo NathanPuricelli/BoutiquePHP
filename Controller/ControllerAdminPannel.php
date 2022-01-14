@@ -52,7 +52,11 @@ class ControllerAdminPannel {
             $status = $order['status'];
             if ($status != 0) {
                 $date = $order['date'];
-                $payment_type = $order['payment_type'];
+                if($order['payment_type'] != null) {
+                    $payment_type = $order['payment_type'];
+                } else {
+                    $payment_type = null;
+                }
                 $total = $order['total'];
 
                 //Gestion du customer
@@ -65,12 +69,16 @@ class ControllerAdminPannel {
 
                 //Gestion de l'addresse
                 $delivery_add_id = $order['delivery_add_id'];
-                $addressTable = $this->adminPannel->getAddress($delivery_add_id);
-                $address = array(
-                    "add1" => $addressTable["add1"],
-                    "city" => $addressTable["city"],
-                    "postcode" => $addressTable["postcode"],
-                );
+                if ($delivery_add_id != null) {
+                    $addressTable = $this->adminPannel->getAddress($delivery_add_id);
+                    $address = array(
+                        "add1" => $addressTable["add1"],
+                        "city" => $addressTable["city"],
+                        "postcode" => $addressTable["postcode"],
+                    );
+                } else {
+                    $address = null;
+                }
 
                 //Gestion de la liste de produits
                 $orderId = $order['id'];

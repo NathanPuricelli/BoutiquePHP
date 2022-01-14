@@ -59,19 +59,24 @@
         <?php else:?>
         <div class="orderBox">
         <?php endif;?>
-            <div class="row" style="text-align:center;">
+            <div class="row">
                 <div class="col-5" style="text-align:left;">
                     <h5>COMMANDE #<?= $order['id'] ?></h5>
                     <p><?= $order['date'] ?><br/>
-                    <?= $order['total'] ?> € (Par <?= $order['payment_type'] ?>)</p>
+                    <?= $order['total'] ?> €
+                    <?php if($order['payment_type'] != null): ?>
+                    (Par <?= $order['payment_type'] ?>)
+                    <?php endif; ?></p>
                 </div>
                 <div class="col-3">
                     <p>Client : <?= $order['customer']['forname']." ".$order['customer']['surname'] ?></p>
                 </div>
                 <div class="col-4" style="text-align:right;">
+                    <?php if($order['address'] != null):?>
                     <p>Adresse : <?= $order['address']['add1'] ?> <br/>
                     <?= $order['address']['city'] ?> <br/>
                     <?= $order['address']['postcode'] ?></p>
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="row">
@@ -91,7 +96,7 @@
                     <?php
                     switch ($order['status']) {
                         case 1:
-                            $txtStatus = "Adresse entrée";
+                            $txtStatus = "Finalisée, prête à être payée";
                             break;
                         case 2:
                             $txtStatus = "Commande payée";

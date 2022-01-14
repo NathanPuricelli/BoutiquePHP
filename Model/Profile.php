@@ -20,13 +20,13 @@ class Profile extends Model {
     {
         if($username == null)
         {
-            $sql = "select * from orders where session = ? and registered = 0 and status != 0";
+            $sql = "select * from orders where session = ? and registered = 0 and status != 0 order by id desc";
             $result = $this->executerRequete($sql, array($session));
             return $result;
         }
         else{
             $sql = "select O.* FROM orders O JOIN customers C on C.id = O.customer_id 
-            WHERE C.id = (SELECT customer_id from logins WHERE username = ?) and O.status != 0";
+            WHERE C.id = (SELECT customer_id from logins WHERE username = ?) and O.status != 0 order by id desc";
             $result = $this->executerRequete($sql, array($username));
             return $result;
         }
@@ -77,7 +77,7 @@ class Profile extends Model {
                 break;
 
                 case "3":
-                $this->executerRequete($sql, array("Carte Bancaire", $orderId));
+                $this->executerRequete($sql, array("CB", $orderId));
                 break;
 
                 default:

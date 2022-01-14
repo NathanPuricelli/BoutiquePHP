@@ -379,7 +379,7 @@ class Router {
         $orderNum = $this->ctrlCart->ctrlGetOrderId($username, session_id());
         if ($orderNum == null)
         {
-            $_SESSION["SESS_ORDERNUM"] =  $orderNum;
+            $_SESSION["SESS_ORDERNUM"] = $orderNum;
             $_SESSION["SESS_ORDERSTATUS"] = null;
         }
         else
