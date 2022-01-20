@@ -65,7 +65,15 @@
                 <?php if($order['status'] == 10 || $order['status'] == 2):?>
                 <div class="col">
                     <form action = "index.php?page=profile" target="_blank" method="POST" class="text-center">
-                        <?=  "<input type='hidden' name='PDF_customer_forname' value=".$order['customer']['forname'].">" ?>
+                        <?=  "<input type='hidden' name='PDF_customer_forname' value='".$order['customer']['forname']."'>" ?>
+                        <?=  "<input type='hidden' name='PDF_customer_surname' value='".$order['customer']['surname']."'>" ?>
+                        <?=  "<input type='hidden' name='PDF_address_add1' value='".$order['address']['add1']."'>" ?>
+                        <?=  "<input type='hidden' name='PDF_address_city' value='".$order['address']['city']."'>" ?>
+                        <?=  "<input type='hidden' name='PDF_address_postcode' value='".$order['address']['postcode']."'>" ?>
+                        <?=  "<input type='hidden' name='PDF_payment_type' value='".$order['payment_type']."'>" ?>
+                        <?=  "<input type='hidden' name='PDF_date' value='".$order['date']."'>" ?>
+                        <?=  "<input type='hidden' name='PDF_total' value=".$order['total'].">" ?>
+
                         <button class="btn1" type="submit" name='createPDF'>OBTENIR LA FACTURE</button>
                     </form>
                 </div>

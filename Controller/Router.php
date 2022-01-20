@@ -307,7 +307,16 @@ class Router {
     private function routAdminPannel() {
         if (isset($_POST['createPDF'])) {
             $pdf = new myPDF('P', 'mm', 'A4');
-            $pdf->createOrderPDF($_POST['PDF_customer_forname']);
+            $customer_forname = $this->getParameter($_POST, "PDF_customer_forname");
+            $customer_surname = $this->getParameter($_POST, "PDF_customer_surname");
+            $address_add1 = $this->getParameter($_POST, "PDF_address_add1");
+            $address_city = $this->getParameter($_POST, "PDF_address_city");
+            $address_postcode = $this->getParameter($_POST, "PDF_address_postcode");
+            $payment_type = $this->getParameter($_POST, "PDF_payment_type");
+            $date = $this->getParameter($_POST, "PDF_date");
+            $total = $this->getParameter($_POST, "PDF_total");
+            $pdf->createOrderPDF($customer_forname, $customer_surname, $address_add1, $address_city,
+                    $address_postcode, $payment_type, $date, $total);
         }
 
         if (isset($_POST['register-request'])) {
@@ -350,14 +359,23 @@ class Router {
     {
         if (isset($_POST['createPDF'])) {
             $pdf = new myPDF('P', 'mm', 'A4');
-            $pdf->createOrderPDF($_POST['PDF_customer_forname']);
+            $customer_forname = $this->getParameter($_POST, "PDF_customer_forname");
+            $customer_surname = $this->getParameter($_POST, "PDF_customer_surname");
+            $address_add1 = $_POST["PDF_address_add1"];
+            $address_city = $this->getParameter($_POST, "PDF_address_city");
+            $address_postcode = $this->getParameter($_POST, "PDF_address_postcode");
+            $payment_type = $this->getParameter($_POST, "PDF_payment_type");
+            $date = $this->getParameter($_POST, "PDF_date");
+            $total = $this->getParameter($_POST, "PDF_total");
+            $pdf->createOrderPDF($customer_forname, $customer_surname, $address_add1, $address_city,
+                    $address_postcode, $payment_type, $date, $total);
         }
         if (isset($_POST["checkout-request"]))
         {
             $this->ctrlCheckout->ctrlAddAdressToOrder($_SESSION["SESS_ORDERNUM"], $this->getParameter($_POST, "checkout_form_firstname"), 
                                                     $this->getParameter($_POST, "checkout_form_surname"), $this->getParameter($_POST, "checkout_form_add1"),
                                                     $this->getParameter($_POST, "checkout_form_city"), $this->getParameter($_POST, "checkout_form_postcode"),
-                                                    $this->getParameter($_POST, "checkout_form_phone"),$this->getParameter($_POST, "checkout_form_email"));
+                                                    $this->getParameter($_POST, "checkout_form_phone"), $this->getParameter($_POST, "checkout_form_email"));
             $this->ctrlProfile->ctrlPayOrder($_SESSION["SESS_ORDERNUM"], $this->getParameter($_POST, "checkout_form_paymentType"));
             if($_SESSION["logged"])
             {
@@ -368,7 +386,7 @@ class Router {
                 $this->setSessionOrder();
             }
         }
-        $this->ctrlProfile->showProfile( session_id(),$_SESSION["username"]); 
+        $this->ctrlProfile->showProfile(session_id(), $_SESSION["username"]); 
     }
 
 
