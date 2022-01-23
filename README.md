@@ -1,53 +1,40 @@
 # Boutique
 
-New Shopify for Raisins Secs and Frozen Bananas dropshipping.
-Ce projet a été fait par Nathan et Aymeric les meilleurs de l'info.
+Cite d'e-commerce réalisé dans le cadre de l'UE Web par Nathan Puricelli et Aymeric Leto les meilleurs de l'info.
 
-Modele (acces a la base de donnée) 
-    -Fonctions d'accès et d'écriture dans la base de données
+Arborescence du projet :
+    Assets :
+        Ce dossier contient les éléments statiques comme le code JS, les images ou les feuilles de style.
+        Il contient aussi la librairie externe de PDF fpdf et son implémentation dans notre projet.
+    
+    Modele (acces a la base de donnée) 
+        Fonctions d'accès et d'écriture dans la base de données qui sont appelées par les controlleurs
 
-Vues : 
-    -Gabarit : base de toutes les pages php, on met le code statique qui bouge pas genre les div, headers et footers
-    -Vues : gère les variables qui changent par rapport au gabarit
-Controller :
-    -Fait le lien entre la bdd et la vue.
+    Vues : 
+        -template.php : base de toutes les pages php du projet, il contient le code php statique qui ne bouge pas genre tels que les headers et footers du site.
+        -View.php : fichier de définition de la classe vue servant à afficher les différentes pages de notre site
+        -Les autres fichiers php sont les vues des différentes pages du site.
 
+    Controlleur :
+        Les controlleurs font le lien entre la couche Modele et la couche vue en appelant les vues avec les bons éléments récupérés par les requêtes de la couche modèle.
 
+    DB : 
+        Ce dossier contient le fichier de création de la base de données, à importer sur MySQL pour pouvoir faire fonctionner le site en local
 
-    To do : 
-        -Panier :
-            Affichage des articles du panier (on créé une commande)
-            Suppression d'un article du panier avec actualisation
-            Bouton Caisse : 
-                -pour les connectés : on valide son adresse (peut etre en remettre une ?)
-                - pour les non connectés : On rentre une adresse dans le formulaire (dans delivery adress)
-                Paypal
-                Chéque (+ facture pdf)
-            Pour les non connectés avec les variables de session
-            Pour les connectés.
-        -Page admin pour check tout (vérifier que l'admin est connecté)
-        -Recherche dans catalogue
-        -connexion : 
-            -Page connexion  :
-                -Inscription et connexion
-                - inscription on renseigne une delivery adress
-            A la connexion, on donne un id à l'utilisateur via $SESSION["id"]
-            si l'utilisateur ajoute au panier, on créé une commande avec custommer_id = $SESSION["id"]
-        -Passer des infos de JS à Php pour ajouter plusieurs au panier (si possible)
+Répartitions des roles dans l'équipe : 
 
-    Idée :
-        -Sur template.php, afficher un onglet 'Profil' même quand l'utilisateur n'est pas un admin ?
-        -Vérif sur l'adresse mail pour pas créer plusieurs customers identiques
+Difficultés et solutions : 
 
-    Vraiment pas urgent :
-        -Gérer bug sur la page inscription quand on efface ses données de navigation depuis celle ci
+Comment faire fonctionner le site :
+    -Importer la base de données web4shop2021.sql dans un serveur local gérant MySQL tel que XAMPP.
+    -Créer un utilisateur MySQL avec pour nom 'userepul' et comme MDP 'epul' et lui accorder les droits sur la base web4shop.
+    -Ou alors, changer dans le fichier de configuration Model/Model.php la fonction 'getBDD()' en modifiant les variables $dbuser et $dbpwd
+    -Vous pourrez ensuite acceder au site en allant sur la page index.php du site.
+
+Comment acceder au pannel admin (validation des commandes, visualisation des factures...) :
+    -Connectez-vous comme un utilisateur classique avec le nom d'utilisatuer 'admin' et le MDP 'admin'
+    -Vous pourrez ensuite gérer les différents admins et les différentes commandes.
 
 
-On ajoute un item dans le panier : 
-    On créé une commande avec cet item et la quantité.
-    Si l'utilisateur n'est pas connecté, on créé une commande avec la variable de session id, puis on récupere l'id de la commande qu'on met dans $SESSION["SESS_ORDERNUM"]. On track apres avec cette session. Quand on se connecte on merge les 2 commandes en regardant session.
-
-//12-01
-Gérer adressse et type de paiement non entrée dans les commandes de status 1 sur le pannel admin
-Gérer la requete sur order depuis un profil connecté
-Arrêter la session à la confirmation d'une commande
+Lien du projet sur la forge lyon 1 : https://forge.univ-lyon1.fr/p1907453/boutique
+Vidéo de présentation du site : 
