@@ -20,30 +20,6 @@ Arborescence du projet :
 
     DB : 
         Ce dossier contient le fichier de création de la base de données, à importer sur MySQL pour pouvoir faire fonctionner le site en local
-
-Répartitions des rôles dans l'équipe : 
-    Nous avons travaillé ensemble sur la plupart des points du projet, c'est pourquoi il est difficile d'attribuer la réalisation des taches à une seule personne.
-    Nous avons par exemple travaillé ensemble sur les différentes parties du back comme le catalogue ou les produits, l'ajout de commentaires...
-    Les taches réalisées plus individuellement sont les suivantes :
-        -Aymeric Leto : 
-            Front end du site (css, bootstrap)
-            Panel administrateur (finaliser les commandes, récuperer les infos des commandes et ajouter un nouvel admin)
-            fpdf pour gérer les factures
-        -Nathan Puricelli :
-            Mise en place architecture MVC
-            Principales requetes SQL
-            Gestion du panier et des commandes lors de la navigation dans le site
-    Pour des informations plus précises sur la réalisation des taches, nous vous invitons à regarder notre projet sur la forge Lyon 1. 
-    Nous pourrons vous ajouter sur le projet pour que vous puissiez voir l'historique des modifications si vous le souhaitez. 
-
-Difficultés et solutions : 
-    Un grand nombre des parties du projet n'étaient pas très difficile mais ont pris beaucoup de temps à réaliser. C'est par exemple le cas du front end du site ou encore de la gestion du panier.
-    Deux points ont été plus difficiles à gérer que les autres : 
-        -Nous n'étions pas familiers avec la gestion des variables de session et de l'architecture MVC. Nous ne savions donc pas où mettre le session_start(). 
-            La solution était de le mettre dans index.php et non pas dans le routeur.
-        -Lors du paiement d'une commande, il fallait mettre à jour la table des commandes (orders) avec l'id de l'adresse de livraison alors renseignée.
-        Le problème était que nous devions faire ces deux opérations en même temps et qu'aucune colonne de notre base de donnée ne regroupait ces deux tables.
-            La solution était de créer dans un premier temps l'adresse de livraison (ligne de delivery_adresses), puis d'utiliser une fonction de PDO nommée getLastInsertId(), qui récupérait l'id de la dernière ligne insérée par PDO.
     
 
 Comment faire fonctionner le site :
